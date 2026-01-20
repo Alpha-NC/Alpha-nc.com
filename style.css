@@ -1625,7 +1625,7 @@ body.menu-open {
 .roadmap-phase-num {
   font-weight: 800;
   color: var(--mint-dark);
-  font-size: 11px;
+  font-size: 16px;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 10px;
