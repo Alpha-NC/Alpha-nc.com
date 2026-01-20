@@ -343,7 +343,7 @@ ul {
 .btn-outline {
   background: transparent;
   border-color: var(--mint-green);
-  color: var(--mint-green);
+  color: var(--mint-dark);
 }
 
 .btn-outline:hover {
@@ -1126,7 +1126,7 @@ body.menu-open {
   padding: 8px 18px;
   background: rgba(102, 241, 209, 0.12);
   border: 1px solid rgba(102, 241, 209, 0.25);
-  color: var(--mint-green);
+  color: var(--mint-dark);
   border-radius: var(--radius-pill);
   font-size: 11px;
   font-weight: 700;
@@ -1486,7 +1486,7 @@ body.menu-open {
 }
 
 .link-underline-dark {
-  color: var(--mint-green);
+  color: var(--mint-dark);
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   position: relative;
@@ -1624,7 +1624,7 @@ body.menu-open {
 
 .roadmap-phase-num {
   font-weight: 800;
-  color: var(--mint-green);
+  color: var(--mint-dark);
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 2px;
