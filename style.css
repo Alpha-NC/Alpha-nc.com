@@ -1284,7 +1284,6 @@ body.menu-open {
   font-size: clamp(36px, 4vw, 54px);
   font-weight: 900;
   color: var(--mint-green);
-  opacity: 0.4;
 }
 
 .stepper-card-title {
