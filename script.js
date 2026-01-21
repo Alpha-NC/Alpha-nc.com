@@ -1736,100 +1736,139 @@ window.addEventListener('load', () => {
 window.addEventListener('beforeunload', cleanup);
 
 // ==========================================================================
-// SCROLL-DRIVEN STEPPER CONTROLLER (METHOD SECTION ONLY)
-// Added module - does not modify any existing code
+// SCROLL-DRIVEN STEPPER - SCROLL HIJACK ON METHOD SECTION
 // ==========================================================================
 
 (function() {
   'use strict';
 
-  // Configuration
-  const SCROLL_STEPPER_CONFIG = {
+  var CONFIG = {
     deltaThreshold: 110,
-    cooldownMs: 800,
+    cooldownMs: 600,
     clickPauseMs: 1200,
-    unlockNudge: 20,
-    visibilityTolerance: 10,
-    mobileBreakpoint: 768
+    mobileBreakpoint: 768,
+    lockOffset: 80 // Distance from top when we lock
   };
 
-  // State
-  let isLocked = false;
-  let currentStep = 1;
-  let totalSteps = 5;
-  let deltaAccumulator = 0;
-  let lastStepChangeTime = 0;
-  let clickPauseUntil = 0;
-  let methodSection = null;
-  let stepperNavItems = null;
-  let stepperCards = null;
-  let isInitialized = false;
+  var isLocked = false;
+  var currentStep = 1;
+  var totalSteps = 5;
+  var deltaAccumulator = 0;
+  var lastStepChangeTime = 0;
+  var clickPauseUntil = 0;
+  var methodSection = null;
+  var stepperNavItems = null;
+  var stepperCards = null;
+  var scrollPositionOnLock = 0;
 
   function prefersReducedMotion() {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 
   function isMobile() {
-    return window.innerWidth < SCROLL_STEPPER_CONFIG.mobileBreakpoint;
+    return window.innerWidth < CONFIG.mobileBreakpoint;
   }
 
-  function isSectionFullyVisible() {
+  function shouldLock() {
     if (!methodSection) return false;
-    const rect = methodSection.getBoundingClientRect();
-    const vh = window.innerHeight;
-    const tol = SCROLL_STEPPER_CONFIG.visibilityTolerance;
-    return rect.top >= -tol && rect.bottom <= vh + tol;
+    var rect = methodSection.getBoundingClientRect();
+    // Lock when top of section reaches lockOffset from top of viewport
+    // AND bottom is still below viewport (we haven't scrolled past it)
+    return rect.top <= CONFIG.lockOffset && rect.bottom > window.innerHeight * 0.5;
+  }
+
+  function shouldUnlockUp() {
+    // Unlock upward when at step 1 and user scrolls up
+    return currentStep === 1;
+  }
+
+  function shouldUnlockDown() {
+    // Unlock downward when at last step and user scrolls down
+    return currentStep >= totalSteps;
   }
 
   function activateStep(stepNumber, fromClick) {
     if (stepNumber < 1 || stepNumber > totalSteps) return;
-    if (stepNumber === currentStep && !fromClick) return;
-
+    
     currentStep = stepNumber;
     lastStepChangeTime = Date.now();
 
-    stepperNavItems.forEach(function(item) {
-      var step = parseInt(item.dataset.step, 10);
-      var isActive = step === stepNumber;
-      item.classList.toggle('active', isActive);
-      item.setAttribute('aria-pressed', String(isActive));
-      item.setAttribute('aria-selected', String(isActive));
-    });
+    if (stepperNavItems) {
+      stepperNavItems.forEach(function(item) {
+        var step = parseInt(item.dataset.step, 10);
+        var isActive = step === stepNumber;
+        item.classList.toggle('active', isActive);
+        item.setAttribute('aria-pressed', String(isActive));
+      });
+    }
 
-    stepperCards.forEach(function(card) {
-      var step = parseInt(card.dataset.step, 10);
-      var isActive = step === stepNumber;
-      card.classList.toggle('active', isActive);
-      if (isActive) {
-        card.setAttribute('aria-current', 'step');
-      } else {
-        card.removeAttribute('aria-current');
-      }
-    });
+    if (stepperCards) {
+      stepperCards.forEach(function(card) {
+        var step = parseInt(card.dataset.step, 10);
+        card.classList.toggle('active', step === stepNumber);
+      });
+    }
 
     if (fromClick) {
-      clickPauseUntil = Date.now() + SCROLL_STEPPER_CONFIG.clickPauseMs;
+      clickPauseUntil = Date.now() + CONFIG.clickPauseMs;
+    }
+  }
+
+  function lockScroll() {
+    if (isLocked) return;
+    isLocked = true;
+    scrollPositionOnLock = window.scrollY;
+    document.body.style.overflow = 'hidden';
+    methodSection.classList.add('is-scroll-locked');
+    console.log('Method section LOCKED at step', currentStep);
+  }
+
+  function unlockScroll(direction) {
+    if (!isLocked) return;
+    isLocked = false;
+    document.body.style.overflow = '';
+    methodSection.classList.remove('is-scroll-locked');
+    console.log('Method section UNLOCKED, direction:', direction);
+    
+    // Small scroll nudge to continue in the right direction
+    if (direction === 'down') {
+      window.scrollBy({ top: 50, behavior: 'auto' });
+    } else if (direction === 'up') {
+      window.scrollBy({ top: -50, behavior: 'auto' });
     }
   }
 
   function handleWheel(e) {
-    if (!isLocked) return;
+    // Only handle when locked
+    if (!isLocked) {
+      // Check if we should lock
+      if (!isMobile() && !prefersReducedMotion() && shouldLock()) {
+        lockScroll();
+        e.preventDefault();
+      }
+      return;
+    }
 
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Keep scroll position fixed
+    window.scrollTo(0, scrollPositionOnLock);
+
+    // Click pause
     if (Date.now() < clickPauseUntil) {
-      e.preventDefault();
       return;
     }
 
-    var now = Date.now();
-    if (now - lastStepChangeTime < SCROLL_STEPPER_CONFIG.cooldownMs) {
-      e.preventDefault();
+    // Cooldown
+    if (Date.now() - lastStepChangeTime < CONFIG.cooldownMs) {
       return;
     }
 
+    // Accumulate delta
     deltaAccumulator += e.deltaY;
 
-    if (Math.abs(deltaAccumulator) >= SCROLL_STEPPER_CONFIG.deltaThreshold) {
-      e.preventDefault();
+    if (Math.abs(deltaAccumulator) >= CONFIG.deltaThreshold) {
       var direction = deltaAccumulator > 0 ? 'down' : 'up';
       deltaAccumulator = 0;
 
@@ -1837,45 +1876,46 @@ window.addEventListener('beforeunload', cleanup);
         if (currentStep < totalSteps) {
           activateStep(currentStep + 1, false);
         } else {
+          // At last step, unlock and continue
           unlockScroll('down');
         }
       } else {
         if (currentStep > 1) {
           activateStep(currentStep - 1, false);
         } else {
+          // At first step, unlock and go back
           unlockScroll('up');
         }
       }
-    } else {
-      e.preventDefault();
     }
   }
 
-  function lockScroll() {
-    if (isLocked || !methodSection) return;
-    isLocked = true;
-    deltaAccumulator = 0;
-    methodSection.classList.add('is-scroll-locked');
-    window.addEventListener('wheel', handleWheel, { passive: false });
-  }
-
-  function unlockScroll(direction) {
-    if (!isLocked || !methodSection) return;
-    isLocked = false;
-    deltaAccumulator = 0;
-    methodSection.classList.remove('is-scroll-locked');
-    window.removeEventListener('wheel', handleWheel);
-
-    if (direction && SCROLL_STEPPER_CONFIG.unlockNudge > 0) {
-      var nudge = direction === 'down' ? SCROLL_STEPPER_CONFIG.unlockNudge : -SCROLL_STEPPER_CONFIG.unlockNudge;
-      window.scrollBy({ top: nudge, behavior: 'auto' });
+  function handleKeydown(e) {
+    if (!isLocked) return;
+    
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (currentStep < totalSteps) {
+        activateStep(currentStep + 1, false);
+      } else {
+        unlockScroll('down');
+      }
+    } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (currentStep > 1) {
+        activateStep(currentStep - 1, false);
+      } else {
+        unlockScroll('up');
+      }
+    } else if (e.key === 'Escape') {
+      unlockScroll('down');
     }
   }
 
   function handleScroll() {
-    if (prefersReducedMotion() || isMobile()) return;
-    if (!methodSection || isLocked) return;
-    if (isSectionFullyVisible()) {
+    if (isMobile() || prefersReducedMotion()) return;
+    
+    if (!isLocked && shouldLock()) {
       lockScroll();
     }
   }
@@ -1895,60 +1935,50 @@ window.addEventListener('beforeunload', cleanup);
     }
   }
 
-  function initARIA() {
-    if (!stepperNavItems) return;
-    stepperNavItems.forEach(function(item) {
-      var step = parseInt(item.dataset.step, 10);
-      item.setAttribute('role', 'tab');
-      item.setAttribute('aria-selected', String(step === currentStep));
-      var card = methodSection.querySelector('.stepper-card[data-step="' + step + '"]');
-      if (card) {
-        var cardId = 'stepper-panel-' + step;
-        card.id = cardId;
-        item.setAttribute('aria-controls', cardId);
-        card.setAttribute('role', 'tabpanel');
-      }
-    });
-    var nav = methodSection.querySelector('.stepper-nav');
-    if (nav) {
-      nav.setAttribute('role', 'tablist');
-      nav.setAttribute('aria-label', 'Étapes de la méthode');
-    }
-  }
-
   function init() {
-    if (isInitialized) return;
-    if (prefersReducedMotion()) return;
+    if (prefersReducedMotion()) {
+      console.log('ScrollDrivenStepper: Disabled (reduced motion)');
+      return;
+    }
 
     methodSection = document.getElementById('method');
-    if (!methodSection) return;
+    if (!methodSection) {
+      console.log('ScrollDrivenStepper: Method section not found');
+      return;
+    }
 
     stepperNavItems = methodSection.querySelectorAll('.stepper-nav-item');
     stepperCards = methodSection.querySelectorAll('.stepper-card');
-    if (stepperNavItems.length === 0 || stepperCards.length === 0) return;
+
+    if (stepperNavItems.length === 0) {
+      console.log('ScrollDrivenStepper: No stepper nav items found');
+      return;
+    }
 
     totalSteps = stepperNavItems.length;
 
+    // Get current active step
     var activeNav = methodSection.querySelector('.stepper-nav-item.active');
     if (activeNav) {
       currentStep = parseInt(activeNav.dataset.step, 10) || 1;
     }
 
-    initARIA();
-
+    // Event listeners
+    window.addEventListener('wheel', handleWheel, { passive: false });
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleResize, { passive: true });
+    document.addEventListener('keydown', handleKeydown);
 
+    // Nav click handler
     var nav = methodSection.querySelector('.stepper-nav');
     if (nav) {
       nav.addEventListener('click', handleNavClick);
     }
 
-    isInitialized = true;
-    console.log('ScrollDrivenStepper: Initialized');
+    console.log('ScrollDrivenStepper: Initialized with', totalSteps, 'steps');
   }
 
-  // Auto-init when DOM is ready
+  // Initialize
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
