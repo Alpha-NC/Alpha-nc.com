@@ -1514,6 +1514,108 @@ body.menu-open {
 }
 
 /* ==========================================================================
+   SCROLL-DRIVEN STEPPER - ADDITIONAL STYLES
+   ========================================================================== */
+
+/* Visual indicator that section is scroll-locked */
+.method-section.method-is-locked {
+  /* Optional subtle visual feedback */
+}
+
+/* Progress indicator for scroll stepper (desktop only) */
+.stepper-scroll-progress {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+@media (min-width: 768px) {
+  .stepper-scroll-progress {
+    display: flex;
+  }
+  
+  .method-section.method-is-locked .stepper-scroll-progress {
+    opacity: 1;
+  }
+}
+
+.stepper-scroll-progress-bar {
+  width: 120px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.stepper-scroll-progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--stepper-progress, 20%);
+  background: var(--mint-green);
+  border-radius: 2px;
+  transition: width 300ms ease;
+}
+
+.stepper-scroll-hint {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Hide hint once user has scrolled through steps */
+.method-section.method-scroll-complete .stepper-scroll-hint {
+  opacity: 0;
+}
+
+/* Enhanced active state for nav items during scroll lock */
+.method-section.method-is-locked .stepper-nav-item.active {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(102, 241, 209, 0.2);
+}
+
+/* Smooth transition for card changes */
+.stepper-card {
+  transition: opacity 350ms ease, transform 350ms ease;
+}
+
+/* Prevent scroll-lock visual jump */
+.method-section.method-is-locked .stepper-wrapper {
+  position: relative;
+}
+
+/* Accessibility: visual focus indicator during keyboard navigation in locked mode */
+.method-section.method-is-locked .stepper-nav-item:focus-visible {
+  outline: 3px solid var(--mint-green);
+  outline-offset: 4px;
+}
+
+/* Reduced motion: disable scroll lock animations */
+@media (prefers-reduced-motion: reduce) {
+  .stepper-scroll-progress {
+    display: none !important;
+  }
+  
+  .method-section.method-is-locked .stepper-nav-item.active {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .stepper-card {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
    ROADMAP SECTION
    ========================================================================== */
 .roadmap-section {
