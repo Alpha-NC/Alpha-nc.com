@@ -187,297 +187,115 @@ function initROIInteraction() {
  * Exécuté quand le DOM est chargé
  */
 
+
 // ==========================================================================
-// METHOD STEPPER — SCROLL "PIN" + SCROLL-DRIVEN STEP SWITCH (click still works)
+// MÉTHODE — AUTO SWITCH AU SCROLL (SANS CHANGER LA STRUCTURE)
 // ==========================================================================
 
 /**
- * Initialise la section Méthode (stepper) :
- * - Comportement demandé :
- *   1) On laisse scroller jusqu'à ce que la section soit entièrement visible
- *   2) La section se "fige" (scroll lock) sur la méthode
- *   3) La molette / trackpad fait défiler les cartes (plus lent)
- *   4) Sur la dernière carte, un scroll supplémentaire libère le scroll vers la section suivante
- * - Le clic sur les étapes reste possible (et met en pause l'auto-switch brièvement)
+ * Améliore la compréhension de la section "Méthode" :
+ * - Les cartes se "switchent" automatiquement au scroll (1 cran = 1 étape)
+ * - La carte active est mise en avant
+ * - Le clic reste possible (et met en pause l'auto pendant un court instant)
+ *
+ * Sans modifier la structure HTML.
  */
-function initMethodStepperScrollLock() {
-  const section = document.querySelector('#method');
+function initMethodScrollStepper() {
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isDesktop = window.matchMedia && window.matchMedia('(min-width: 900px)').matches; // only on larger screens
+  if (prefersReduced || !isDesktop) return;
+
+  const section = document.getElementById('method');
   if (!section) return;
 
-  const navItems = Array.from(section.querySelectorAll('.stepper-nav-item[data-step]'));
-  const cards = Array.from(section.querySelectorAll('.stepper-card[data-step]'));
-  const accordionTriggers = Array.from(section.querySelectorAll('.stepper-accordion-trigger[data-step]'));
-  const accordionItems = Array.from(section.querySelectorAll('.stepper-accordion-item[data-step]'));
+  const rows = Array.from(section.querySelectorAll('.timeline-row'));
+  if (!rows.length) return;
 
-  if (!navItems.length || !cards.length) return;
-
-  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  const MAX_STEP = Math.max(...cards.map(c => parseInt(c.dataset.step, 10)).filter(Number.isFinite));
-  let activeStep = 1;
-
-  // Scroll-lock state
-  let pinned = false;
-  let snappedOnce = false;
-  let wheelAccum = 0;
+  let activeIndex = 0;
   let lastSwitchAt = 0;
-  let manualPauseUntil = 0;
+  let clickPauseUntil = 0;
+  let wheelAccum = 0;
 
-  // Tunables (slower + more deliberate)
-  const DELTA_THRESHOLD = 240;     // ↑ = moins sensible trackpad
-  const SWITCH_COOLDOWN = 1400;    // ↑ = plus lent
-  const SNAP_DELAY_MS = 220;
+  // Slower switching
+  const SWITCH_COOLDOWN_MS = 1100; // <- plus lent
+  const DELTA_THRESHOLD = 90;      // <- évite micro scrolls
+  const CLICK_PAUSE_MS = 1400;
 
-  function clampStep(n) {
-    return Math.max(1, Math.min(MAX_STEP, n));
+  function setActive(index, { scroll = false } = {}) {
+    const clamped = Math.max(0, Math.min(rows.length - 1, index));
+    activeIndex = clamped;
+
+    rows.forEach((row, i) => row.classList.toggle('is-active', i === clamped));
+
+    if (scroll) rows[clamped].scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
-  function setActiveUI(step) {
-    // Cards
-    cards.forEach(card => {
-      const s = parseInt(card.dataset.step, 10);
-      card.classList.toggle('active', s === step);
-      card.setAttribute('aria-hidden', s === step ? 'false' : 'true');
-    });
+  // Initial state
+  setActive(0, { scroll: false });
 
-    // Nav buttons
-    navItems.forEach(btn => {
-      const s = parseInt(btn.dataset.step, 10);
-      const isActive = s === step;
-      btn.classList.toggle('active', isActive);
-      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-    });
-
-    // Mobile accordion (if present)
-    if (accordionItems.length && accordionTriggers.length) {
-      accordionItems.forEach(item => {
-        const s = parseInt(item.dataset.step, 10);
-        const isActive = s === step;
-        item.classList.toggle('active', isActive);
-        const content = item.querySelector('.stepper-accordion-content');
-        const trigger = item.querySelector('.stepper-accordion-trigger');
-        if (content && trigger) {
-          trigger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-          content.hidden = !isActive;
-        }
-      });
-    }
-  }
-
-  function activateStep(step, source = 'scroll') {
-    const next = clampStep(step);
-    if (next === activeStep) return;
-    activeStep = next;
-    setActiveUI(activeStep);
-
-    // Petite aide UX : quand on clique, on met en pause l'auto-switch
-    if (source === 'click') {
-      manualPauseUntil = Date.now() + 1600;
-      wheelAccum = 0;
-    }
-  }
-
-  function getNextSection(el) {
-    let cur = el.nextElementSibling;
-    while (cur) {
-      if (cur.matches && cur.matches('section')) return cur;
-      cur = cur.nextElementSibling;
-    }
-    return null;
-  }
-
-  function getPrevSection(el) {
-    let cur = el.previousElementSibling;
-    while (cur) {
-      if (cur.matches && cur.matches('section')) return cur;
-      cur = cur.previousElementSibling;
-    }
-    return null;
-  }
-
-  function scrollToSection(target, direction = 'down') {
-    if (!target) return;
-    const behavior = prefersReducedMotion ? 'auto' : 'smooth';
-    target.scrollIntoView({ behavior, block: 'start' });
-  }
-
-  function isFullyVisible(el) {
-    const rect = el.getBoundingClientRect();
-    const vh = window.innerHeight || document.documentElement.clientHeight;
-    // tolérance de 8px pour éviter les micro-écarts
-    return rect.top >= -8 && rect.bottom <= vh + 8;
-  }
-
-  function isReasonablyPinnable(el) {
-    const rect = el.getBoundingClientRect();
-    const vh = window.innerHeight || document.documentElement.clientHeight;
-    // si la section est trop grande pour tenir à l'écran, on évite le scroll-lock agressif
-    return rect.height <= vh * 0.98;
-  }
-
-  function pin() {
-    if (pinned || prefersReducedMotion) return;
-    pinned = true;
-    wheelAccum = 0;
-    section.classList.add('is-pinned');
-    document.body.classList.add('method-scrolllock');
-  }
-
-  function unpin() {
-    if (!pinned) return;
-    pinned = false;
-    wheelAccum = 0;
-    section.classList.remove('is-pinned');
-    document.body.classList.remove('method-scrolllock');
-  }
-
-  function maybeSnapAndPin() {
-    if (prefersReducedMotion) return;
-
-    // On ne "fige" que si la section peut tenir à l'écran ET est entièrement visible
-    if (!isReasonablyPinnable(section)) {
-      unpin();
-      return;
-    }
-
-    if (isFullyVisible(section)) {
-      if (!snappedOnce) {
-        // Snap doux pour que l'utilisateur voie la section en entier avant blocage
-        const behavior = prefersReducedMotion ? 'auto' : 'smooth';
-        section.scrollIntoView({ behavior, block: 'center' });
-        snappedOnce = true;
-        setTimeout(() => {
-          if (isFullyVisible(section)) pin();
-        }, SNAP_DELAY_MS);
-      } else {
-        pin();
-      }
-    } else {
-      // Si on sort de la zone, on libère
-      unpin();
-      snappedOnce = false;
-    }
-  }
-
-  // Click handlers (desktop nav)
-  navItems.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const step = parseInt(btn.dataset.step, 10);
-      activateStep(step, 'click');
+  // Click keeps working + pauses auto
+  rows.forEach((row, i) => {
+    row.addEventListener('click', () => {
+      clickPauseUntil = Date.now() + CLICK_PAUSE_MS;
+      setActive(i, { scroll: true });
     });
   });
 
-  // Click handlers (mobile accordion)
-  accordionTriggers.forEach(tr => {
-    tr.addEventListener('click', () => {
-      const step = parseInt(tr.dataset.step, 10);
-      activateStep(step, 'click');
-    });
+  // Update active row as user scrolls normally
+  const io = new IntersectionObserver((entries) => {
+    if (Date.now() < clickPauseUntil) return;
+
+    let best = null;
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      if (!best || e.intersectionRatio > best.intersectionRatio) best = e;
+    }
+    if (!best) return;
+
+    const idx = rows.indexOf(best.target);
+    if (idx !== -1 && idx !== activeIndex) setActive(idx, { scroll: false });
+  }, {
+    threshold: [0.35, 0.5, 0.65, 0.8],
+    rootMargin: '-10% 0px -35% 0px'
   });
 
-  // Wheel / trackpad — pinned mode
-  function onWheel(e) {
-    if (!pinned) return;
+  rows.forEach(r => io.observe(r));
 
-    // Si l'utilisateur est en train de cliquer/choisir, on respecte une pause
-    const now = Date.now();
-    if (now < manualPauseUntil) return;
+  function inPinnedZone() {
+    // "Se fixe sur la section" : on active le mode stepper quand la section est bien cadrée
+    const rect = section.getBoundingClientRect();
+    const topGate = 150;
+    const bottomGate = window.innerHeight - 150;
+    return rect.top <= topGate && rect.bottom >= bottomGate;
+  }
 
-    // Empêcher le scroll de que la page bouge : on est "figé" sur la section
-    e.preventDefault();
-
-    // Si trop tôt après un switch, on ignore pour ralentir
-    if (now - lastSwitchAt < SWITCH_COOLDOWN) return;
+  function handleWheel(e) {
+    if (!inPinnedZone()) return;
+    if (Date.now() < clickPauseUntil) return;
 
     wheelAccum += e.deltaY;
 
     if (Math.abs(wheelAccum) < DELTA_THRESHOLD) return;
 
+    const now = Date.now();
+    if (now - lastSwitchAt < SWITCH_COOLDOWN_MS) return;
+
     const dir = wheelAccum > 0 ? 1 : -1;
     wheelAccum = 0;
 
-    if (dir > 0) {
-      if (activeStep < MAX_STEP) {
-        activateStep(activeStep + 1, 'scroll');
-        lastSwitchAt = now;
-      } else {
-        // Dernière carte => libérer et aller à la section suivante au prochain "cran"
-        unpin();
-        lastSwitchAt = now;
-        const next = getNextSection(section);
-        scrollToSection(next, 'down');
-      }
-    } else {
-      if (activeStep > 1) {
-        activateStep(activeStep - 1, 'scroll');
-        lastSwitchAt = now;
-      } else {
-        // Première carte => libérer et remonter à la section précédente
-        unpin();
-        lastSwitchAt = now;
-        const prev = getPrevSection(section);
-        scrollToSection(prev, 'up');
-      }
-    }
-  }
+    const next = activeIndex + dir;
 
-  // Keyboard support while pinned
-  function onKeyDown(e) {
-    if (!pinned) return;
+    // At edges, let natural scroll exit the section
+    if (next < 0 || next >= rows.length) return;
 
-    const keys = ['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', ' ', 'Spacebar'];
-    if (!keys.includes(e.key)) return;
-
+    // Prevent default scroll -> step-by-step progression
     e.preventDefault();
-    const now = Date.now();
-    if (now < manualPauseUntil) return;
-    if (now - lastSwitchAt < SWITCH_COOLDOWN) return;
-
-    const down = (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ' || e.key === 'Spacebar');
-    if (down) {
-      if (activeStep < MAX_STEP) {
-        activateStep(activeStep + 1, 'scroll');
-        lastSwitchAt = now;
-      } else {
-        unpin();
-        lastSwitchAt = now;
-        const next = getNextSection(section);
-        scrollToSection(next, 'down');
-      }
-    } else {
-      if (activeStep > 1) {
-        activateStep(activeStep - 1, 'scroll');
-        lastSwitchAt = now;
-      } else {
-        unpin();
-        lastSwitchAt = now;
-        const prev = getPrevSection(section);
-        scrollToSection(prev, 'up');
-      }
-    }
+    lastSwitchAt = now;
+    setActive(next, { scroll: true });
   }
 
-  // Touch support (basic) while pinned: block touchmove to avoid leaving the section
-  function onTouchMove(e) {
-    if (!pinned) return;
-    e.preventDefault();
-  }
-
-  // Listen
-  window.addEventListener('scroll', maybeSnapAndPin, { passive: true });
-  window.addEventListener('resize', () => {
-    snappedOnce = false;
-    maybeSnapAndPin();
-  }, { passive: true });
-
-  window.addEventListener('wheel', onWheel, { passive: false });
-  window.addEventListener('keydown', onKeyDown, { passive: false });
-  window.addEventListener('touchmove', onTouchMove, { passive: false });
-
-  // Initial UI state
-  setActiveUI(activeStep);
-  // Start watching after a tick
-  setTimeout(maybeSnapAndPin, 200);
+  window.addEventListener('wheel', handleWheel, { passive: false });
+  window.addEventListener('resize', () => { wheelAccum = 0; });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -486,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initFAQ();
   initROIInteraction();
-  initMethodStepperScrollLock();
+  initMethodScrollStepper();
 
   // Log pour confirmer que le script est chargé
   console.log('✅ Alpha No_Code - Script chargé avec succès');
