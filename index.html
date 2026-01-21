@@ -316,39 +316,33 @@
 
         <div class="stepper-wrapper">
           <!-- Stepper Navigation (Desktop) -->
-          <nav class="stepper-nav" aria-label="Étapes de la méthode" role="tablist">
-            <button class="stepper-nav-item active" data-step="1" aria-pressed="true" aria-selected="true" role="tab" aria-controls="stepper-panel-1" id="stepper-tab-1" tabindex="0">
+          <nav class="stepper-nav" aria-label="Étapes de la méthode">
+            <button class="stepper-nav-item active" data-step="1" aria-pressed="true">
               <span class="stepper-nav-num">01</span>
               <span class="stepper-nav-label">Clarté</span>
             </button>
-            <button class="stepper-nav-item" data-step="2" aria-pressed="false" aria-selected="false" role="tab" aria-controls="stepper-panel-2" id="stepper-tab-2" tabindex="-1">
+            <button class="stepper-nav-item" data-step="2" aria-pressed="false">
               <span class="stepper-nav-num">02</span>
               <span class="stepper-nav-label">Quick wins</span>
             </button>
-            <button class="stepper-nav-item" data-step="3" aria-pressed="false" aria-selected="false" role="tab" aria-controls="stepper-panel-3" id="stepper-tab-3" tabindex="-1">
+            <button class="stepper-nav-item" data-step="3" aria-pressed="false">
               <span class="stepper-nav-num">03</span>
               <span class="stepper-nav-label">Standards</span>
             </button>
-            <button class="stepper-nav-item" data-step="4" aria-pressed="false" aria-selected="false" role="tab" aria-controls="stepper-panel-4" id="stepper-tab-4" tabindex="-1">
+            <button class="stepper-nav-item" data-step="4" aria-pressed="false">
               <span class="stepper-nav-num">04</span>
               <span class="stepper-nav-label">Déploiement</span>
             </button>
-            <button class="stepper-nav-item" data-step="5" aria-pressed="false" aria-selected="false" role="tab" aria-controls="stepper-panel-5" id="stepper-tab-5" tabindex="-1">
+            <button class="stepper-nav-item" data-step="5" aria-pressed="false">
               <span class="stepper-nav-num">05</span>
               <span class="stepper-nav-label">Run</span>
             </button>
           </nav>
 
-          <!-- Scroll Progress Indicator (added for UX feedback) -->
-          <div class="stepper-scroll-progress" aria-hidden="true">
-            <div class="stepper-scroll-progress-bar"></div>
-            <span class="stepper-scroll-hint">Scrollez pour naviguer</span>
-          </div>
-
           <!-- Stepper Content -->
-          <div class="stepper-content" role="tabpanel" aria-labelledby="stepper-tab-1">
+          <div class="stepper-content">
             <!-- Step 1 -->
-            <article class="stepper-card active" data-step="1" id="stepper-panel-1" role="tabpanel" aria-labelledby="stepper-tab-1">
+            <article class="stepper-card active" data-step="1">
               <div class="stepper-card-header">
                 <span class="stepper-card-num">01</span>
                 <h3 class="stepper-card-title">Clarté</h3>
@@ -364,7 +358,7 @@
             </article>
 
             <!-- Step 2 -->
-            <article class="stepper-card" data-step="2" id="stepper-panel-2" role="tabpanel" aria-labelledby="stepper-tab-2">
+            <article class="stepper-card" data-step="2">
               <div class="stepper-card-header">
                 <span class="stepper-card-num">02</span>
                 <h3 class="stepper-card-title">Quick wins</h3>
@@ -380,7 +374,7 @@
             </article>
 
             <!-- Step 3 -->
-            <article class="stepper-card" data-step="3" id="stepper-panel-3" role="tabpanel" aria-labelledby="stepper-tab-3">
+            <article class="stepper-card" data-step="3">
               <div class="stepper-card-header">
                 <span class="stepper-card-num">03</span>
                 <h3 class="stepper-card-title">Standards</h3>
@@ -397,7 +391,7 @@
             </article>
 
             <!-- Step 4 -->
-            <article class="stepper-card" data-step="4" id="stepper-panel-4" role="tabpanel" aria-labelledby="stepper-tab-4">
+            <article class="stepper-card" data-step="4">
               <div class="stepper-card-header">
                 <span class="stepper-card-num">04</span>
                 <h3 class="stepper-card-title">Déploiement</h3>
@@ -414,7 +408,7 @@
             </article>
 
             <!-- Step 5 -->
-            <article class="stepper-card" data-step="5" id="stepper-panel-5" role="tabpanel" aria-labelledby="stepper-tab-5">
+            <article class="stepper-card" data-step="5">
               <div class="stepper-card-header">
                 <span class="stepper-card-num">05</span>
                 <h3 class="stepper-card-title">Run</h3>
@@ -554,218 +548,325 @@
               <p>Standards, templates, règles de validation, structure documentaire anti-chaos.</p>
             </div>
             <div class="roadmap-phase reveal-on-scroll" style="transition-delay:160ms;">
-              <span class="roadmap-phase-num">6 – 9 mois</span>
-              <h4>Optimisation</h4>
-              <p>Automatisations avancées, intégrations outils, reporting automatique.</p>
+              <span class="roadmap-phase-num">6 – 12 mois</span>
+              <h4>Optimisation & Run</h4>
+              <p>Automatisations utiles, dashboards, amélioration continue, sérénité installée.</p>
             </div>
-            <div class="roadmap-phase reveal-on-scroll" style="transition-delay:240ms;">
-              <span class="roadmap-phase-num">9 – 12 mois</span>
-              <h4>Run & amélioration continue</h4>
-              <p>Pilotage, itérations mensuelles, ajustements selon vos besoins.</p>
-            </div>
+          </div>
+
+          <div class="roadmap-ctas">
+            <a href="https://alpha-nc.github.io/etude-Agence-Mayoko/" target="_blank" rel="noopener" class="btn btn-outline">
+              Voir l'étude
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ETUDE DE CAS MAYOKO -->
-    <section id="cases" class="section-padding case-study-section" aria-labelledby="case-title">
+    <!-- CASE - Étude Mayoko -->
+    <section id="cases" class="section-padding mayoko" aria-labelledby="case-title">
       <div class="container">
-        <div class="section-title text-center reveal-on-scroll">
-          <span class="pill-badge">Étude de cas</span>
-          <h2 id="case-title">Comment Mayoko a récupéré +90 jours/an</h2>
-          <p>Agence créative de 12 personnes. Problème : briefs flous, validations infinies, marge qui s'érode.</p>
-        </div>
+        <div class="case-card reveal-on-scroll">
+          <div class="case-content">
+            <span class="case-badge animate__animated animate__fadeInUp" style="animation-duration:520ms;">
+              Étude de cas : Mayoko
+            </span>
+            <h2 id="case-title" style="margin-bottom:16px;letter-spacing:-.02em;">"On a récupéré 3 mois de travail."</h2>
+            <p class="text-muted" style="margin-bottom:18px;">
+              Mayoko, agence de Buzz marketing, croulait sous le copier-coller et les validations dispersées. En rationalisant leur chaîne de production avec Alpha No_Code, l'équipe a fiabilisé le flux brief→livraison et libéré du temps pour la créa.
+            </p>
+            
+            <div class="case-context">
+              <p><strong>Contexte :</strong> Équipe de 8 personnes, ~50 projets/mois, outils dispersés.</p>
+              <p><strong>Problème :</strong> Reporting manuel chronophage, versions qui s'accumulent, validations perdues.</p>
+              <p><strong>Solution :</strong> Audit + structuration + automatisations clés (relances, statuts, reporting).</p>
+            </div>
 
-        <div class="case-grid">
-          <!-- Before -->
-          <div class="case-card case-before reveal-on-scroll">
-            <div class="case-badge case-badge-before">Avant</div>
-            <ul class="case-list">
-              <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> Briefs reçus par mail, Slack, vocal</li>
-              <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> 4 allers-retours moyens par projet</li>
-              <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> Reporting Excel manuel (3h/semaine)</li>
-              <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> Relances clients manuelles</li>
-              <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> Aucune checklist QA</li>
+            <ul class="case-results" style="margin:22px 0;">
+              <li><span class="result-icon"><i class="fa-solid fa-circle-check"></i></span> <strong>90 jours/an</strong> libérés sur les tâches à faible valeur.</li>
+              <li><span class="result-icon"><i class="fa-solid fa-circle-check"></i></span> Moins d'erreurs dans les livrables (validations tracées).</li>
+              <li><span class="result-icon"><i class="fa-solid fa-circle-check"></i></span> Clients plus sereins grâce à une visibilité claire sur l'avancement.</li>
             </ul>
+            <a href="https://alpha-nc.github.io/etude-Agence-Mayoko/" target="_blank" rel="noopener" class="btn btn-outline">
+              Lire l'étude complète
+            </a>
           </div>
 
-          <!-- After -->
-          <div class="case-card case-after reveal-on-scroll" style="transition-delay:100ms;">
-            <div class="case-badge case-badge-after">Après</div>
-            <ul class="case-list">
-              <li><i class="fa-solid fa-check" aria-hidden="true"></i> 1 formulaire structuré = brief complet</li>
-              <li><i class="fa-solid fa-check" aria-hidden="true"></i> 1,5 aller-retour en moyenne</li>
-              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Dashboard auto en temps réel</li>
-              <li><i class="fa-solid fa-check" aria-hidden="true"></i> Relances automatiques programmées</li>
-              <li><i class="fa-solid fa-check" aria-hidden="true"></i> QA intégrée au workflow</li>
-            </ul>
+          <div class="case-visual">
+            <div class="glass-float">
+              <div style="text-align:center;">
+                <div style="font-size:3rem;font-weight:900;letter-spacing:-.02em;">+90</div>
+                <div style="font-size:1rem;opacity:.86;letter-spacing:.08em;">JOURS / AN</div>
+                <div style="font-size:.85rem;opacity:.65;margin-top:8px;">récupérés sur le répétitif</div>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <!-- Results -->
-        <div class="case-results reveal-on-scroll">
-          <div class="case-result-item">
-            <span class="case-result-num">+90</span>
-            <span class="case-result-label">jours récupérés / an</span>
-          </div>
-          <div class="case-result-item">
-            <span class="case-result-num">-62%</span>
-            <span class="case-result-label">de versions par projet</span>
-          </div>
-          <div class="case-result-item">
-            <span class="case-result-num">3h</span>
-            <span class="case-result-label">gagnées / semaine (reporting)</span>
-          </div>
-        </div>
-
-        <div class="text-center reveal-on-scroll" style="margin-top:48px;">
-          <a href="https://alpha-nc.github.io/Audit-Agence-Creative/" target="_blank" rel="noopener" class="btn btn-primary shine-effect">
-            Découvrir si c'est possible chez vous
-          </a>
         </div>
       </div>
     </section>
 
-    <!-- OFFRES -->
+    <!-- OFFERS -->
     <section id="offers" class="section-padding offers-section" aria-labelledby="offers-title">
       <div class="container">
         <div class="section-title text-center reveal-on-scroll">
-          <span class="pill-badge">Nos offres</span>
-          <h2 id="offers-title">Choisissez votre niveau d'accompagnement</h2>
-          <p>Du diagnostic ponctuel à l'accompagnement long terme.</p>
+          <h2 id="offers-title">Nos offres</h2>
+          <p>Un point d'entrée simple (Audit), puis une montée en puissance selon votre rythme, pour produire avec plus de sérénité.</p>
         </div>
 
         <div class="offers-grid">
-          <!-- Offer 1 -->
-          <article class="offer-card reveal-on-scroll">
-            <div class="offer-badge">Audit</div>
-            <h3 class="offer-title">Clarté</h3>
-            <p class="offer-desc">Cartographie complète de vos frictions + plan d'action priorisé sur 30 jours.</p>
+          <!-- Offre 1 : Audit -->
+          <article class="offer-card offer-card--featured reveal-on-scroll">
+            <div class="offer-badge">Recommandé pour démarrer</div>
+            <h3 class="offer-title">Audit de maturité</h3>
+            <p class="offer-subtitle">Clarté immédiate sur vos frictions</p>
+            
             <ul class="offer-features">
-              <li><i class="fa-solid fa-check"></i> Audit flux complet</li>
-              <li><i class="fa-solid fa-check"></i> Top 3 frictions identifiées</li>
-              <li><i class="fa-solid fa-check"></i> Plan 0-30 jours</li>
-              <li><i class="fa-solid fa-check"></i> 1 restitution (2h)</li>
+              <li><span class="feature-check"><i class="fa-solid fa-check"></i></span> Interview équipe (1-2h)</li>
+              <li><span class="feature-check"><i class="fa-solid fa-check"></i></span> Analyse du flux brief → livraison</li>
+              <li><span class="feature-check"><i class="fa-solid fa-check"></i></span> Cartographie des frictions</li>
+              <li><span class="feature-check"><i class="fa-solid fa-check"></i></span> Top 3 priorités identifiées</li>
+              <li><span class="feature-check"><i class="fa-solid fa-check"></i></span> Plan d'action 0-30 jours</li>
             </ul>
+
+            <div class="offer-meta">
+              <div class="offer-meta-item">
+                <strong>Durée</strong>
+                <span>1 à 2 semaines</span>
+              </div>
+              <div class="offer-meta-item">
+                <strong>Pour qui</strong>
+                <span>Agences qui veulent y voir clair</span>
+              </div>
+              <div class="offer-meta-item">
+                <strong>Résultat</strong>
+                <span>Clarté sur où agir en priorité</span>
+              </div>
+            </div>
+
+            <a href="https://alpha-nc.github.io/Audit-Agence-Creative/" target="_blank" rel="noopener" class="btn btn-primary shine-effect offer-cta">
+              Demander l'audit
+            </a>
+          </article>
+
+          <!-- Offre 2 : Sprint Structuration -->
+          <article class="offer-card reveal-on-scroll" style="transition-delay:80ms;">
+            <h3 class="offer-title">Sprint Structuration</h3>
+            <p class="offer-subtitle">Socle solide pour scaler</p>
+            
+            <ul class="offer-features">
+              <li><span class="feature-check"><i class="fa-solid fa-check"></i></span> Templates brief & validation</li>
+              <li><span class="feature-check"><i class="fa-solid fa-check"></i></span> Règles de validation documentées</li>
+              <li><span class="feature-check"><i class="fa-solid fa-check"></i></span> Structure documentaire anti-chaos</li>
+              <li><span class="feature-check"><i class="fa-solid fa-check"></i></span> Checklists QA & recettage</li>
+              <li><span class="feature-check"><i class="fa-solid fa-check"></i></span> Formation équipe (2h)</li>
+            </ul>
+
+            <div class="offer-meta">
+              <div class="offer-meta-item">
+                <strong>Durée</strong>
+                <span>4 à 8 semaines</span>
+              </div>
+              <div class="offer-meta-item">
+                <strong>Pour qui</strong>
+                <span>Agences qui veulent structurer</span>
+              </div>
+              <div class="offer-meta-item">
+                <strong>Résultat</strong>
+                <span>Socle stable pour onboarder et scaler</span>
+              </div>
+            </div>
+
             <a href="https://alpha-nc.github.io/Audit-Agence-Creative/" target="_blank" rel="noopener" class="btn btn-outline offer-cta">
-              Demander un audit
+              En savoir plus
             </a>
           </article>
 
-          <!-- Offer 2 -->
-          <article class="offer-card offer-highlight reveal-on-scroll" style="transition-delay:80ms;">
-            <div class="offer-badge offer-badge-highlight">Recommandé</div>
-            <h3 class="offer-title">Quick wins + Standards</h3>
-            <p class="offer-desc">On élimine le répétitif et on pose les standards en 90 jours.</p>
-            <ul class="offer-features">
-              <li><i class="fa-solid fa-check"></i> Tout l'audit "Clarté"</li>
-              <li><i class="fa-solid fa-check"></i> Brief structuré</li>
-              <li><i class="fa-solid fa-check"></i> Validations centralisées</li>
-              <li><i class="fa-solid fa-check"></i> Relances automatisées</li>
-              <li><i class="fa-solid fa-check"></i> Templates & standards</li>
-              <li><i class="fa-solid fa-check"></i> Formation équipe (2h)</li>
-            </ul>
-            <a href="https://calendly.com/agence-alphanc/audit-decouverte" target="_blank" rel="noopener" class="btn btn-primary shine-effect offer-cta">
-              Réserver un appel
-            </a>
-          </article>
-
-          <!-- Offer 3 -->
+          <!-- Offre 3 : Run mensuel -->
           <article class="offer-card reveal-on-scroll" style="transition-delay:160ms;">
-            <div class="offer-badge">Long terme</div>
-            <h3 class="offer-title">Run</h3>
-            <p class="offer-desc">Accompagnement continu : on pilote, on améliore, vous gardez un système qui tient.</p>
+            <h3 class="offer-title">Run mensuel</h3>
+            <p class="offer-subtitle">Amélioration continue</p>
+            
             <ul class="offer-features">
-              <li><i class="fa-solid fa-check"></i> Tout Quick wins + Standards</li>
-              <li><i class="fa-solid fa-check"></i> 1 friction / itération</li>
-              <li><i class="fa-solid fa-check"></i> Automatisations avancées</li>
-              <li><i class="fa-solid fa-check"></i> Dashboard de pilotage</li>
-              <li><i class="fa-solid fa-check"></i> Point mensuel de suivi</li>
+              <li><span class="feature-check"><i class="fa-solid fa-check"></i></span> 1 friction traitée / mois</li>
+              <li><span class="feature-check"><i class="fa-solid fa-check"></i></span> Automatisations utiles</li>
+              <li><span class="feature-check"><i class="fa-solid fa-check"></i></span> Dashboard de pilotage</li>
+              <li><span class="feature-check"><i class="fa-solid fa-check"></i></span> Point mensuel (1h)</li>
+              <li><span class="feature-check"><i class="fa-solid fa-check"></i></span> Support prioritaire</li>
             </ul>
-            <a href="https://calendly.com/agence-alphanc/audit-decouverte" target="_blank" rel="noopener" class="btn btn-outline offer-cta">
-              Discutons-en
+
+            <div class="offer-meta">
+              <div class="offer-meta-item">
+                <strong>Durée</strong>
+                <span>Engagement 3 mois min.</span>
+              </div>
+              <div class="offer-meta-item">
+                <strong>Pour qui</strong>
+                <span>Agences structurées qui veulent optimiser</span>
+              </div>
+              <div class="offer-meta-item">
+                <strong>Résultat</strong>
+                <span>Amélioration continue, sérénité</span>
+              </div>
+            </div>
+
+            <a href="https://alpha-nc.github.io/Audit-Agence-Creative/" target="_blank" rel="noopener" class="btn btn-outline offer-cta">
+              En savoir plus
             </a>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ROI CALCULATOR -->
-    <section class="section-padding roi-section" aria-labelledby="roi-title">
+    <!-- ON FAIT / ON NE FAIT PAS -->
+    <section class="section-padding do-dont-section" aria-labelledby="do-dont-title">
       <div class="container">
-        <div class="roi-grid">
-          <div class="roi-intro reveal-on-scroll">
-            <span class="pill-badge">Simulateur</span>
-            <h2 id="roi-title">Estimez votre gain potentiel</h2>
-            <p>Basé sur nos observations terrain : 15-25% du temps de production peut être récupéré en structurant les process.</p>
-          </div>
-
-          <div class="roi-calculator reveal-on-scroll" style="transition-delay:100ms;">
-            <div class="roi-field">
-              <label for="roi-team">Taille de l'équipe</label>
-              <div class="roi-input-wrapper">
-                <input type="number" id="roi-team" value="8" min="1" max="100" aria-describedby="roi-team-hint" />
-                <span class="roi-input-suffix">personnes</span>
-              </div>
-              <span class="roi-hint" id="roi-team-hint">Équipe impliquée dans la production</span>
-            </div>
-
-            <div class="roi-field">
-              <label for="roi-hours">Heures / semaine (par personne)</label>
-              <div class="roi-input-wrapper">
-                <input type="number" id="roi-hours" value="40" min="1" max="80" aria-describedby="roi-hours-hint" />
-                <span class="roi-input-suffix">h / sem</span>
-              </div>
-              <span class="roi-hint" id="roi-hours-hint">Temps de travail hebdomadaire</span>
-            </div>
-
-            <div class="roi-field">
-              <label for="roi-rate">Taux horaire moyen</label>
-              <div class="roi-input-wrapper">
-                <input type="number" id="roi-rate" value="55" min="1" max="500" aria-describedby="roi-rate-hint" />
-                <span class="roi-input-suffix">€ / h</span>
-              </div>
-              <span class="roi-hint" id="roi-rate-hint">Coût horaire chargé moyen</span>
-            </div>
-
-            <button type="button" id="roi-calculate" class="btn btn-primary shine-effect">
-              Calculer mon gain
-            </button>
-
-            <a href="https://alpha-nc.github.io/Audit-Agence-Creative/" target="_blank" rel="noopener" class="roi-audit-link">
-              Vérifier ce chiffre avec un audit <i class="fa-solid fa-arrow-right"></i>
-            </a>
-          </div>
+        <div class="section-title text-center reveal-on-scroll">
+          <h2 id="do-dont-title">On fait / On ne fait pas</h2>
+          <p>Pour être clair sur notre approche et éviter les malentendus.</p>
         </div>
 
-        <!-- ROI Result Cards -->
-        <div class="roi-results-grid" id="roi-results" aria-live="polite">
-          <div class="roi-result-card reveal-on-scroll">
-            <div class="roi-result-icon" aria-hidden="true">
-              <i class="fa-solid fa-clock"></i>
-            </div>
-            <div class="roi-result-value" id="roi-hours-saved">--</div>
-            <div class="roi-result-label">heures récupérées / an</div>
-            <div class="roi-result-breakdown" id="roi-hours-breakdown"></div>
+        <div class="do-dont-grid">
+          <div class="do-card reveal-on-scroll">
+            <h3 class="do-title"><span class="do-icon"><i class="fa-solid fa-check"></i></span> Ce qu'on fait</h3>
+            <ul class="do-list">
+              <li>Auditer vos process existants sans jugement</li>
+              <li>Proposer des solutions simples et maintenables</li>
+              <li>Documenter pour que votre équipe soit autonome</li>
+              <li>Automatiser ce qui a du sens (pas du gadget)</li>
+              <li>S'adapter à vos outils existants</li>
+              <li>Préserver votre patte créative</li>
+            </ul>
           </div>
 
-          <div class="roi-result-card reveal-on-scroll" style="transition-delay:80ms;">
-            <div class="roi-result-icon" aria-hidden="true">
-              <i class="fa-solid fa-calendar-days"></i>
-            </div>
-            <div class="roi-result-value" id="roi-days-saved">--</div>
-            <div class="roi-result-label">jours récupérés / an</div>
-            <div class="roi-result-breakdown" id="roi-days-breakdown"></div>
+          <div class="dont-card reveal-on-scroll" style="transition-delay:80ms;">
+            <h3 class="dont-title"><span class="dont-icon"><i class="fa-solid fa-xmark"></i></span> Ce qu'on ne fait pas</h3>
+            <ul class="dont-list">
+              <li>Vendre des démos IA "waouh" sans utilité réelle</li>
+              <li>Construire des usines à gaz impossible à maintenir</li>
+              <li>Imposer des outils sans comprendre votre contexte</li>
+              <li>Promettre des résultats magiques en 2 semaines</li>
+              <li>Créer de la dépendance technique à nos services</li>
+              <li>Toucher à votre identité créative</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROI -->
+    <section id="roi" class="section-padding roi-section" aria-labelledby="roi-title">
+      <div class="container">
+        <div class="roi-container">
+          <div class="roi-content reveal-on-scroll">
+            <h2 id="roi-title" style="color:#fff;font-size:2.35rem;margin-bottom:14px;letter-spacing:-.02em;">
+              L'automatisation n'est pas un coût,<br />c'est un investissement.
+            </h2>
+            <p style="color:rgba(245,247,250,.62);margin-bottom:22px;">
+              Estimez ce que vous récupérez en supprimant le répétitif et en sécurisant le flux (brief → prod → validation → livraison).
+            </p>
+            
+            <!-- ROI Calculator Form -->
+            <form id="roi-calculator" class="roi-calculator" aria-label="Calculateur de ROI">
+              <div class="roi-field">
+                <label for="roi-team-size">Taille de l'équipe</label>
+                <div class="roi-input-wrapper">
+                  <input type="number" id="roi-team-size" name="teamSize" min="1" max="100" value="5" aria-describedby="roi-team-hint" />
+                  <span class="roi-input-suffix">personnes</span>
+                </div>
+                <span id="roi-team-hint" class="roi-hint">Nombre de collaborateurs impliqués</span>
+              </div>
+              
+              <div class="roi-field">
+                <label for="roi-hours-lost">Heures perdues / semaine / personne</label>
+                <div class="roi-input-wrapper">
+                  <input type="number" id="roi-hours-lost" name="hoursLost" min="1" max="40" value="4" aria-describedby="roi-hours-hint" />
+                  <span class="roi-input-suffix">heures</span>
+                </div>
+                <span id="roi-hours-hint" class="roi-hint">Temps moyen sur tâches répétitives</span>
+              </div>
+              
+              <div class="roi-field">
+                <label for="roi-hourly-rate">Coût horaire moyen</label>
+                <div class="roi-input-wrapper">
+                  <input type="number" id="roi-hourly-rate" name="hourlyRate" min="15" max="500" value="35" aria-describedby="roi-rate-hint" />
+                  <span class="roi-input-suffix">€/h</span>
+                </div>
+                <span id="roi-rate-hint" class="roi-hint">Coût chargé ou facturable</span>
+              </div>
+              
+              <button type="submit" id="roi-calc-btn" class="btn btn-primary shine-effect">
+                <i class="fa-solid fa-calculator" aria-hidden="true"></i>
+                Calculer mon ROI
+              </button>
+            </form>
+            
+            <a href="https://alpha-nc.github.io/Audit-Agence-Creative/" target="_blank" rel="noopener" class="roi-audit-link">
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              Demander un audit personnalisé
+            </a>
           </div>
 
-          <div class="roi-result-card roi-result-highlight reveal-on-scroll" style="transition-delay:160ms;">
-            <div class="roi-result-icon" aria-hidden="true">
-              <i class="fa-solid fa-euro-sign"></i>
+          <!-- Colonne droite : une seule carte à gratter (toutes les infos révélées après grattage) -->
+          <div class="roi-visual reveal-on-scroll">
+
+            <!-- Carte à gratter (masquée par défaut, affichée après calcul ROI) -->
+            <div class="roi-card scratch-card is-hidden" id="scratch-card" hidden aria-hidden="true">
+              <div class="scratch-container" id="scratchContainer" role="img" aria-label="Zone interactive à gratter pour révéler votre gain potentiel">
+                <!-- Canvas for scratch effect -->
+                <canvas id="scratch-canvas" aria-hidden="true"></canvas>
+                
+                <!-- Hidden content revealed after scratching -->
+                <div class="scratch-content" id="scratchContent" aria-live="polite">
+                  <p class="roi-card-label">Gain potentiel annuel estimé</p>
+                  <div class="roi-stat-display" id="scratch-annual-gain">—</div>
+                  <p class="roi-stat-subtitle calculated" id="scratch-subtitle">Soit +<span id="scratch-days-value">—</span> jours/an récupérés</p>
+
+                  <!-- Détail du calcul (dépliable) - révélé après grattage -->
+                  <button type="button" class="roi-breakdown-toggle" id="roi-breakdown-toggle" aria-expanded="false" aria-controls="roi-breakdown">
+                    <span>Détail du calcul</span>
+                    <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                  </button>
+                  <div class="roi-breakdown" id="roi-breakdown" hidden>
+                    <div class="roi-breakdown-content">
+                      <h4>Valeurs saisies</h4>
+                      <ul class="roi-breakdown-values">
+                        <li><span>Taille de l'équipe :</span> <strong id="breakdown-team">5</strong> personnes</li>
+                        <li><span>Heures perdues/semaine/pers. :</span> <strong id="breakdown-hours">4</strong> h</li>
+                        <li><span>Coût horaire moyen :</span> <strong id="breakdown-rate">35</strong> €/h</li>
+                      </ul>
+                      <h4>Formules utilisées</h4>
+                      <ul class="roi-breakdown-formulas">
+                        <li><span>Heures perdues/an :</span> équipe × heures/sem. × 47 sem.</li>
+                        <li><span>Gain € annuel :</span> heures perdues/an × coût horaire</li>
+                        <li><span>Jours récupérés :</span> heures perdues/an ÷ 8 h/jour</li>
+                      </ul>
+                      <div class="roi-breakdown-result">
+                        <p>Résultat : <strong id="breakdown-result">—</strong></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Overlay text (avant grattage) -->
+                <div class="scratch-overlay-text" id="scratch-overlay-text">
+                  <i class="fa-solid fa-hand-pointer" aria-hidden="true"></i>
+                  <span class="scratch-overlay-title">Grattez pour révéler votre gain potentiel</span>
+                  <span class="scratch-overlay-hint">Passez votre souris ou votre doigt</span>
+                </div>
+              </div>
+              
+              <!-- Reset button -->
+              <button class="scratch-reset" id="scratchReset" aria-label="Réinitialiser le scratch">
+                <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Réessayer
+              </button>
+              
+              <!-- Fallback for reduced motion / no canvas -->
+              <div class="scratch-fallback" id="scratch-fallback" hidden>
+                <p class="roi-card-label">Gain potentiel annuel estimé</p>
+                <div class="roi-stat-display" id="scratch-fallback-gain">—</div>
+                <p class="roi-stat-subtitle calculated" id="scratch-fallback-subtitle">Soit +<span id="scratch-fallback-days">—</span> jours/an récupérés</p>
+              </div>
             </div>
-            <div class="roi-result-value" id="roi-money-saved">--</div>
-            <div class="roi-result-label">économisés / an</div>
-            <div class="roi-result-breakdown" id="roi-money-breakdown"></div>
           </div>
         </div>
       </div>
@@ -861,8 +962,8 @@
         </div>
 
         <div class="text-center" style="margin-top:24px;">
-          <a href="mailto:contact@alpha-nc.com" class="link-underline-dark reveal-on-scroll" style="transition-delay:80ms;">
-            contact@alpha-nc.com
+          <a href="/cdn-cgi/l/email-protection#ff979a939390bf9e938f979ed291909c909b9ad19c9092" class="link-underline-dark reveal-on-scroll" style="transition-delay:80ms;">
+            <span class="__cf_email__" data-cfemail="a0c8c5cccccfe0c1ccd0c8c18dcecfc3cfc4c58ec3cfcd">contact@alpha-nc.com</span>
           </a>
         </div>
       </div>
@@ -906,7 +1007,7 @@
         <div class="footer-col">
           <h4>Contact</h4>
           <ul>
-            <li><a href="mailto:contact@alpha-nc.com">contact@alpha-nc.com</a></li>
+            <li><a href="/cdn-cgi/l/email-protection#7b131e1717143b1a170b131a56151418141f1e55181416"><span class="__cf_email__" data-cfemail="670f020b0b0827060b170f064a0908040803024904080a">contact@alpha-nc.com</span></a></li>
             <li><a href="https://calendly.com/agence-alphanc/audit-decouverte" target="_blank" rel="noopener" class="footer-cta-link">Réserver un call</a></li>
           </ul>
         </div>
@@ -919,10 +1020,10 @@
   </footer>
 
   <!-- VANTA.JS DEPENDENCIES (Three.js + Vanta NET) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"></script>
 
-  <!-- MAIN SCRIPT -->
+  <!-- MAIN SCRIPTS -->
   <script src="script.js"></script>
 </body>
 </html>
