@@ -1734,3 +1734,225 @@ window.addEventListener('load', () => {
 // ==========================================================================
 
 window.addEventListener('beforeunload', cleanup);
+
+// ==========================================================================
+// SCROLL-DRIVEN STEPPER CONTROLLER (METHOD SECTION ONLY)
+// Added module - does not modify any existing code
+// ==========================================================================
+
+(function() {
+  'use strict';
+
+  // Configuration
+  const SCROLL_STEPPER_CONFIG = {
+    deltaThreshold: 200,
+    cooldownMs: 1600,
+    clickPauseMs: 1200,
+    unlockNudge: 20,
+    visibilityTolerance: 10,
+    mobileBreakpoint: 768
+  };
+
+  // State
+  let isLocked = false;
+  let currentStep = 1;
+  let totalSteps = 5;
+  let deltaAccumulator = 0;
+  let lastStepChangeTime = 0;
+  let clickPauseUntil = 0;
+  let methodSection = null;
+  let stepperNavItems = null;
+  let stepperCards = null;
+  let isInitialized = false;
+
+  function prefersReducedMotion() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  function isMobile() {
+    return window.innerWidth < SCROLL_STEPPER_CONFIG.mobileBreakpoint;
+  }
+
+  function isSectionFullyVisible() {
+    if (!methodSection) return false;
+    const rect = methodSection.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const tol = SCROLL_STEPPER_CONFIG.visibilityTolerance;
+    return rect.top >= -tol && rect.bottom <= vh + tol;
+  }
+
+  function activateStep(stepNumber, fromClick) {
+    if (stepNumber < 1 || stepNumber > totalSteps) return;
+    if (stepNumber === currentStep && !fromClick) return;
+
+    currentStep = stepNumber;
+    lastStepChangeTime = Date.now();
+
+    stepperNavItems.forEach(function(item) {
+      var step = parseInt(item.dataset.step, 10);
+      var isActive = step === stepNumber;
+      item.classList.toggle('active', isActive);
+      item.setAttribute('aria-pressed', String(isActive));
+      item.setAttribute('aria-selected', String(isActive));
+    });
+
+    stepperCards.forEach(function(card) {
+      var step = parseInt(card.dataset.step, 10);
+      var isActive = step === stepNumber;
+      card.classList.toggle('active', isActive);
+      if (isActive) {
+        card.setAttribute('aria-current', 'step');
+      } else {
+        card.removeAttribute('aria-current');
+      }
+    });
+
+    if (fromClick) {
+      clickPauseUntil = Date.now() + SCROLL_STEPPER_CONFIG.clickPauseMs;
+    }
+  }
+
+  function handleWheel(e) {
+    if (!isLocked) return;
+
+    if (Date.now() < clickPauseUntil) {
+      e.preventDefault();
+      return;
+    }
+
+    var now = Date.now();
+    if (now - lastStepChangeTime < SCROLL_STEPPER_CONFIG.cooldownMs) {
+      e.preventDefault();
+      return;
+    }
+
+    deltaAccumulator += e.deltaY;
+
+    if (Math.abs(deltaAccumulator) >= SCROLL_STEPPER_CONFIG.deltaThreshold) {
+      e.preventDefault();
+      var direction = deltaAccumulator > 0 ? 'down' : 'up';
+      deltaAccumulator = 0;
+
+      if (direction === 'down') {
+        if (currentStep < totalSteps) {
+          activateStep(currentStep + 1, false);
+        } else {
+          unlockScroll('down');
+        }
+      } else {
+        if (currentStep > 1) {
+          activateStep(currentStep - 1, false);
+        } else {
+          unlockScroll('up');
+        }
+      }
+    } else {
+      e.preventDefault();
+    }
+  }
+
+  function lockScroll() {
+    if (isLocked || !methodSection) return;
+    isLocked = true;
+    deltaAccumulator = 0;
+    methodSection.classList.add('is-scroll-locked');
+    window.addEventListener('wheel', handleWheel, { passive: false });
+  }
+
+  function unlockScroll(direction) {
+    if (!isLocked || !methodSection) return;
+    isLocked = false;
+    deltaAccumulator = 0;
+    methodSection.classList.remove('is-scroll-locked');
+    window.removeEventListener('wheel', handleWheel);
+
+    if (direction && SCROLL_STEPPER_CONFIG.unlockNudge > 0) {
+      var nudge = direction === 'down' ? SCROLL_STEPPER_CONFIG.unlockNudge : -SCROLL_STEPPER_CONFIG.unlockNudge;
+      window.scrollBy({ top: nudge, behavior: 'auto' });
+    }
+  }
+
+  function handleScroll() {
+    if (prefersReducedMotion() || isMobile()) return;
+    if (!methodSection || isLocked) return;
+    if (isSectionFullyVisible()) {
+      lockScroll();
+    }
+  }
+
+  function handleNavClick(e) {
+    var navItem = e.target.closest('.stepper-nav-item');
+    if (!navItem) return;
+    var step = parseInt(navItem.dataset.step, 10);
+    if (!isNaN(step)) {
+      activateStep(step, true);
+    }
+  }
+
+  function handleResize() {
+    if (isMobile() && isLocked) {
+      unlockScroll();
+    }
+  }
+
+  function initARIA() {
+    if (!stepperNavItems) return;
+    stepperNavItems.forEach(function(item) {
+      var step = parseInt(item.dataset.step, 10);
+      item.setAttribute('role', 'tab');
+      item.setAttribute('aria-selected', String(step === currentStep));
+      var card = methodSection.querySelector('.stepper-card[data-step="' + step + '"]');
+      if (card) {
+        var cardId = 'stepper-panel-' + step;
+        card.id = cardId;
+        item.setAttribute('aria-controls', cardId);
+        card.setAttribute('role', 'tabpanel');
+      }
+    });
+    var nav = methodSection.querySelector('.stepper-nav');
+    if (nav) {
+      nav.setAttribute('role', 'tablist');
+      nav.setAttribute('aria-label', 'Étapes de la méthode');
+    }
+  }
+
+  function init() {
+    if (isInitialized) return;
+    if (prefersReducedMotion()) return;
+
+    methodSection = document.getElementById('method');
+    if (!methodSection) return;
+
+    stepperNavItems = methodSection.querySelectorAll('.stepper-nav-item');
+    stepperCards = methodSection.querySelectorAll('.stepper-card');
+    if (stepperNavItems.length === 0 || stepperCards.length === 0) return;
+
+    totalSteps = stepperNavItems.length;
+
+    var activeNav = methodSection.querySelector('.stepper-nav-item.active');
+    if (activeNav) {
+      currentStep = parseInt(activeNav.dataset.step, 10) || 1;
+    }
+
+    initARIA();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    var nav = methodSection.querySelector('.stepper-nav');
+    if (nav) {
+      nav.addEventListener('click', handleNavClick);
+    }
+
+    isInitialized = true;
+    console.log('ScrollDrivenStepper: Initialized');
+  }
+
+  // Auto-init when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+})();
