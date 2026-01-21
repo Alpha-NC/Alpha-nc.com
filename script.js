@@ -1,7 +1,7 @@
 /**
  * Alpha No_Code - Main JavaScript
- * Version 6.0 - Scroll-Driven Method Stepper
- * Features: Mobile menu, FAQ, scroll reveal, Vanta.NET, Typewriter, Scroll-lock Stepper, Advantages, ROI Calculator with Breakdown, Integrated Scratch Card
+ * Version 5.2 - Unified ROI Cards + Integrated Scratch Reveal
+ * Features: Mobile menu, FAQ, scroll reveal, Vanta.NET, Typewriter, Stepper, Advantages, ROI Calculator with Breakdown, Integrated Scratch Card
  */
 
 // ==========================================================================
@@ -26,13 +26,10 @@ const CONFIG = {
     pauseAfterTyping: 2200,    // ms to pause after typing word
     pauseAfterDeleting: 380    // ms to pause after deleting word
   },
-  // Stepper settings - Scroll-driven mode
+  // Stepper settings
   stepper: {
-    autoPlayInterval: 0,       // Disabled - using scroll-driven
-    autoPlayEnabled: false,    // Disabled - using scroll-driven
-    scrollCooldown: 1800,      // ms cooldown between step changes
-    scrollDeltaThreshold: 180, // min deltaY accumulated to trigger step change
-    clickPauseDuration: 1400   // ms pause after clicking a step
+    autoPlayInterval: 5000,    // Auto-play interval (0 to disable)
+    autoPlayEnabled: false     // Set to true for auto-advance
   },
   // Breakpoints
   breakpoints: {
@@ -59,14 +56,6 @@ function prefersReducedMotion() {
  */
 function isMobileDevice() {
   return window.innerWidth < CONFIG.breakpoints.disableVanta;
-}
-
-/**
- * Checks if device is touch-based
- * @returns {boolean}
- */
-function isTouchDevice() {
-  return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 }
 
 /**
@@ -363,68 +352,35 @@ function initTypewriter() {
 }
 
 // ==========================================================================
-// STEPPER (METHOD SECTION) - SCROLL-DRIVEN
+// STEPPER (METHOD SECTION)
 // ==========================================================================
 
 let stepperAutoPlayInterval = null;
 
-// Scroll-driven stepper state
-const stepperState = {
-  isLocked: false,
-  currentStep: 1,
-  totalSteps: 5,
-  deltaAccumulator: 0,
-  lastStepChangeTime: 0,
-  clickPauseUntil: 0,
-  isDesktop: true,
-  section: null,
-  stepperNav: null,
-  stepperCards: null,
-  stepperNavItems: null,
-  activateStepFn: null
-};
-
 /**
  * Initializes the stepper component for the method section
- * Now with scroll-driven behavior
  */
 function initStepper() {
   const stepperNav = document.querySelector('.stepper-nav');
   const stepperCards = document.querySelectorAll('.stepper-card');
   const stepperNavItems = document.querySelectorAll('.stepper-nav-item');
-  const methodSection = document.getElementById('method');
   
-  if (!stepperNav || stepperCards.length === 0 || !methodSection) {
+  if (!stepperNav || stepperCards.length === 0) {
     return;
   }
 
-  // Store references
-  stepperState.section = methodSection;
-  stepperState.stepperNav = stepperNav;
-  stepperState.stepperCards = stepperCards;
-  stepperState.stepperNavItems = stepperNavItems;
-  stepperState.totalSteps = stepperCards.length;
-
   // Skip interactive stepper for reduced motion
   if (prefersReducedMotion()) {
-    // Show all cards stacked
-    stepperCards.forEach(card => {
-      card.classList.add('active');
-      card.setAttribute('aria-hidden', 'false');
-    });
-    console.log('Stepper: reduced motion mode - all cards visible');
+    // Show all cards
+    stepperCards.forEach(card => card.classList.add('active'));
     return;
   }
 
   /**
    * Activates a specific step
    * @param {number} stepNumber - The step to activate (1-5)
-   * @param {boolean} fromClick - Whether this was triggered by a click
    */
-  function activateStep(stepNumber, fromClick = false) {
-    // Clamp step number
-    stepNumber = Math.max(1, Math.min(stepNumber, stepperState.totalSteps));
-    
+  function activateStep(stepNumber) {
     // Update nav items
     stepperNavItems.forEach(item => {
       const isActive = parseInt(item.dataset.step) === stepNumber;
@@ -432,47 +388,40 @@ function initStepper() {
       item.setAttribute('aria-pressed', isActive.toString());
     });
 
-    // Update cards with aria-hidden
+    // Update cards
     stepperCards.forEach(card => {
       const isActive = parseInt(card.dataset.step) === stepNumber;
       card.classList.toggle('active', isActive);
-      card.setAttribute('aria-hidden', (!isActive).toString());
     });
-
-    stepperState.currentStep = stepNumber;
-    stepperState.lastStepChangeTime = Date.now();
-
-    // If triggered by click, set pause timer
-    if (fromClick) {
-      stepperState.clickPauseUntil = Date.now() + CONFIG.stepper.clickPauseDuration;
-    }
   }
-
-  // Store reference to activateStep
-  stepperState.activateStepFn = activateStep;
 
   // Click handlers for nav items
   stepperNavItems.forEach(item => {
     item.addEventListener('click', () => {
       const step = parseInt(item.dataset.step);
-      activateStep(step, true);
+      activateStep(step);
+      
+      // Reset auto-play timer if enabled
+      if (CONFIG.stepper.autoPlayEnabled) {
+        resetAutoPlay();
+      }
     });
   });
 
-  // Keyboard support for stepper nav
+  // Keyboard support
   stepperNav.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-      e.preventDefault();
-      const currentStep = stepperState.currentStep;
+      const currentActive = document.querySelector('.stepper-nav-item.active');
+      const currentStep = parseInt(currentActive?.dataset.step || 1);
       
       let nextStep;
       if (e.key === 'ArrowRight') {
-        nextStep = currentStep < stepperState.totalSteps ? currentStep + 1 : currentStep;
+        nextStep = currentStep < 5 ? currentStep + 1 : 1;
       } else {
-        nextStep = currentStep > 1 ? currentStep - 1 : currentStep;
+        nextStep = currentStep > 1 ? currentStep - 1 : 5;
       }
       
-      activateStep(nextStep, true);
+      activateStep(nextStep);
       
       // Focus the new active item
       const nextItem = document.querySelector(`.stepper-nav-item[data-step="${nextStep}"]`);
@@ -480,143 +429,49 @@ function initStepper() {
     }
   });
 
-  // Initialize scroll-driven behavior (desktop only)
-  initScrollDrivenStepper(methodSection, activateStep);
-
-  console.log('Stepper initialized with scroll-driven behavior');
-}
-
-/**
- * Initializes scroll-driven stepper behavior
- * @param {HTMLElement} section - The method section element
- * @param {Function} activateStep - Function to activate a step
- */
-function initScrollDrivenStepper(section, activateStep) {
-  // Check if we should enable scroll-driven mode
-  const shouldEnableScrollDriven = () => {
-    return window.innerWidth >= 768 && !prefersReducedMotion() && !isTouchDevice();
-  };
-
-  stepperState.isDesktop = shouldEnableScrollDriven();
-
-  /**
-   * Lock the stepper section
-   */
-  function lockStepper() {
-    if (stepperState.isLocked) return;
+  // Auto-play functionality (if enabled)
+  function startAutoPlay() {
+    if (!CONFIG.stepper.autoPlayEnabled || CONFIG.stepper.autoPlayInterval <= 0) return;
     
-    stepperState.isLocked = true;
-    stepperState.deltaAccumulator = 0;
-    section.classList.add('is-locked');
-    document.body.classList.add('method-locked');
+    stepperAutoPlayInterval = setInterval(() => {
+      const currentActive = document.querySelector('.stepper-nav-item.active');
+      const currentStep = parseInt(currentActive?.dataset.step || 1);
+      const nextStep = currentStep < 5 ? currentStep + 1 : 1;
+      activateStep(nextStep);
+    }, CONFIG.stepper.autoPlayInterval);
   }
 
-  /**
-   * Unlock the stepper section
-   */
-  function unlockStepper() {
-    if (!stepperState.isLocked) return;
-    
-    stepperState.isLocked = false;
-    stepperState.deltaAccumulator = 0;
-    section.classList.remove('is-locked');
-    document.body.classList.remove('method-locked');
+  function resetAutoPlay() {
+    if (stepperAutoPlayInterval) {
+      clearInterval(stepperAutoPlayInterval);
+    }
+    startAutoPlay();
   }
 
-  /**
-   * Handle wheel event for scroll-driven stepper
-   * @param {WheelEvent} e
-   */
-  function handleWheel(e) {
-    // Skip if not in desktop mode or during click pause
-    if (!stepperState.isDesktop) return;
-    if (Date.now() < stepperState.clickPauseUntil) return;
+  // Start auto-play
+  startAutoPlay();
 
-    const rect = section.getBoundingClientRect();
-    const headerHeight = document.querySelector('header')?.offsetHeight || 0;
-    
-    // Check if section is in the "lock zone"
-    const sectionTop = rect.top;
-    const sectionBottom = rect.bottom;
-    const viewportHeight = window.innerHeight;
-    
-    // Section is in lock zone when it's positioned at the top (under header) and fills the viewport
-    const tolerance = 50;
-    const isInLockZone = sectionTop <= headerHeight + tolerance && 
-                          sectionTop >= headerHeight - 150 &&
-                          sectionBottom >= viewportHeight - tolerance;
-    
-    if (!isInLockZone) {
-      // Not in lock zone - let normal scroll happen
-      if (stepperState.isLocked) {
-        unlockStepper();
-      }
-      return;
-    }
+  // Intersection observer to pause auto-play when not visible
+  if (CONFIG.stepper.autoPlayEnabled) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          startAutoPlay();
+        } else {
+          if (stepperAutoPlayInterval) {
+            clearInterval(stepperAutoPlayInterval);
+          }
+        }
+      });
+    }, { threshold: 0.3 });
 
-    // We're in the lock zone
-    const direction = e.deltaY > 0 ? 1 : -1; // 1 = down, -1 = up
-    const now = Date.now();
-
-    // Check for unlock conditions at boundaries
-    if (direction > 0 && stepperState.currentStep === stepperState.totalSteps) {
-      // At last step, scrolling down -> unlock and continue
-      if (stepperState.isLocked) {
-        unlockStepper();
-      }
-      return;
-    }
-
-    if (direction < 0 && stepperState.currentStep === 1) {
-      // At first step, scrolling up -> unlock and continue
-      if (stepperState.isLocked) {
-        unlockStepper();
-      }
-      return;
-    }
-
-    // Lock the section and handle step change
-    if (!stepperState.isLocked) {
-      lockStepper();
-    }
-
-    // Prevent default scroll while locked
-    e.preventDefault();
-
-    // Accumulate delta
-    stepperState.deltaAccumulator += Math.abs(e.deltaY);
-
-    // Check if cooldown has passed and threshold reached
-    const cooldownPassed = (now - stepperState.lastStepChangeTime) >= CONFIG.stepper.scrollCooldown;
-    const thresholdReached = stepperState.deltaAccumulator >= CONFIG.stepper.scrollDeltaThreshold;
-
-    if (cooldownPassed && thresholdReached) {
-      // Change step
-      const newStep = stepperState.currentStep + direction;
-      
-      if (newStep >= 1 && newStep <= stepperState.totalSteps) {
-        activateStep(newStep, false);
-        stepperState.deltaAccumulator = 0;
-      }
+    const methodSection = document.getElementById('method');
+    if (methodSection) {
+      observer.observe(methodSection);
     }
   }
 
-  // Add wheel event listener (passive: false to allow preventDefault)
-  document.addEventListener('wheel', handleWheel, { passive: false });
-
-  // Handle resize - disable scroll-driven on mobile/touch
-  window.addEventListener('resize', () => {
-    const wasDesktop = stepperState.isDesktop;
-    stepperState.isDesktop = shouldEnableScrollDriven();
-    
-    if (wasDesktop && !stepperState.isDesktop) {
-      // Switched to mobile - unlock
-      unlockStepper();
-    }
-  });
-
-  // Store unlock function for external use
-  stepperState.unlockFn = unlockStepper;
+  console.log('Stepper initialized');
 }
 
 /**
@@ -627,16 +482,14 @@ function initStepperAccordion() {
   
   if (accordionItems.length === 0) return;
 
-  // Skip for reduced motion - show all content
+  // Skip for reduced motion
   if (prefersReducedMotion()) {
+    // Show all content
     accordionItems.forEach(item => {
       const content = item.querySelector('.stepper-accordion-content');
       const trigger = item.querySelector('.stepper-accordion-trigger');
       if (content) content.classList.add('active');
-      if (trigger) {
-        trigger.classList.add('active');
-        trigger.setAttribute('aria-expanded', 'true');
-      }
+      if (trigger) trigger.classList.add('active');
     });
     return;
   }
@@ -794,11 +647,6 @@ function initSmoothScroll() {
       if (!target) return;
       
       e.preventDefault();
-
-      // Unlock stepper if navigating away
-      if (stepperState.isLocked && stepperState.unlockFn) {
-        stepperState.unlockFn();
-      }
       
       // Calcul de l'offset pour tenir compte du header sticky
       const headerHeight = document.querySelector('header')?.offsetHeight || 0;
@@ -1805,11 +1653,6 @@ function cleanup() {
   if (stepperAutoPlayInterval) {
     clearInterval(stepperAutoPlayInterval);
     stepperAutoPlayInterval = null;
-  }
-
-  // Unlock stepper if locked
-  if (stepperState.isLocked && stepperState.unlockFn) {
-    stepperState.unlockFn();
   }
   
   if (resizeTimeout) {

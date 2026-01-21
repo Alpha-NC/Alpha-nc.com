@@ -2954,101 +2954,6 @@ footer {
 }
 
 /* ==========================================================================
-   SCROLL-DRIVEN STEPPER - Method Section Lock State
-   ========================================================================== */
-
-/* Body class when method section is locked */
-body.method-locked {
-  /* Prevent scroll via CSS as backup */
-}
-
-/* Method section locked state */
-.method-section.is-locked {
-  /* Visual indicator that section is in scroll-lock mode */
-  position: relative;
-}
-
-.method-section.is-locked::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 4px;
-  background: linear-gradient(90deg, transparent, var(--mint-green), transparent);
-  border-radius: 2px;
-  opacity: 0.6;
-  animation: stepperLockPulse 2s ease-in-out infinite;
-}
-
-@keyframes stepperLockPulse {
-  0%, 100% { opacity: 0.4; width: 60px; }
-  50% { opacity: 0.8; width: 80px; }
-}
-
-/* Progress indicator for current step */
-.method-section.is-locked .stepper-nav {
-  position: relative;
-}
-
-.method-section.is-locked .stepper-nav::after {
-  content: "";
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 1px;
-}
-
-/* Enhanced active state when locked */
-.method-section.is-locked .stepper-nav-item.active {
-  background: rgba(102, 241, 209, 0.18);
-  border-color: rgba(102, 241, 209, 0.5);
-  box-shadow: 0 0 20px rgba(102, 241, 209, 0.15);
-}
-
-/* Stepper card transition enhancement */
-.stepper-card {
-  transition: opacity 350ms ease-out, transform 350ms ease-out;
-}
-
-.method-section.is-locked .stepper-card.active {
-  animation: stepperCardEnter 400ms ease-out;
-}
-
-@keyframes stepperCardEnter {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Mobile: No lock state, just show accordion */
-@media (max-width: 767px) {
-  .method-section.is-locked::after {
-    display: none;
-  }
-  
-  body.method-locked {
-    overflow: auto !important;
-  }
-}
-
-/* Touch devices: Disable lock visuals */
-@media (hover: none) and (pointer: coarse) {
-  .method-section.is-locked::after {
-    display: none;
-  }
-}
-
-/* ==========================================================================
    REDUCED MOTION
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
@@ -3080,19 +2985,9 @@ body.method-locked {
     opacity: 1 !important;
   }
   
-  /* Scroll-driven stepper: disabled in reduced motion */
-  .method-section.is-locked::after {
-    display: none !important;
-  }
-  
-  body.method-locked {
-    overflow: auto !important;
-  }
-  
   .stepper-card {
     display: block !important;
     margin-bottom: 24px;
-    opacity: 1 !important;
   }
   
   .stepper-nav {
@@ -3108,10 +3003,6 @@ body.method-locked {
       display: flex !important;
       flex-direction: column;
       gap: 24px;
-    }
-    
-    .stepper-card {
-      animation: none !important;
     }
   }
 }
