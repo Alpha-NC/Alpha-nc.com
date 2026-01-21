@@ -1745,8 +1745,8 @@ window.addEventListener('beforeunload', cleanup);
 
   // Configuration
   const SCROLL_STEPPER_CONFIG = {
-    deltaThreshold: 200,
-    cooldownMs: 1600,
+    deltaThreshold: 110,
+    cooldownMs: 800,
     clickPauseMs: 1200,
     unlockNudge: 20,
     visibilityTolerance: 10,
