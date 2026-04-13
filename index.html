@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alpha No_Code | Structuration & automatisation pour entreprises de services</title>
+  <meta name="description" content="Alpha No_Code remet de l'ordre dans vos process avant d'automatiser. Moins de désorganisation opérationnelle, plus de marge, plus de sérénité. Pour agences, avocats et acteurs de l'immobilier." />
+  <meta name="keywords" content="automatisation process, structuration agence, audit opérationnel, no-code entreprise, optimisation process" />
+  <meta property="og:title" content="Alpha No_Code | Structuration & automatisation pour entreprises de services" />
+  <meta property="og:description" content="La désorganisation opérationnelle grignote votre marge. On remet de l'ordre. Audit, structuration et automatisation utile." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+  <!-- ── Header ── -->
+  <header class="site-header">
+    <div class="container header-bar">
+      <a href="#home" class="brand-group" aria-label="Alpha No_Code — Accueil">
+        <img src="https://z-cdn-media.chatglm.cn/files/4865b8b1-f1e7-4a55-9116-e7069e92d95b.png?auth_key=1868766478-c457842d6c274d0788f83edb2b9f6a58-0-d319a15aaa33ab9badd3a3ded10439ae" alt="Alpha No_Code" class="brand-logo-img" />
+        <span class="brand-name">Alpha No_Code</span>
+      </a>
+
+      <nav class="nav-menu" aria-label="Navigation principale">
+        <a href="#frictions" class="nav-link">Freins</a>
+        <a href="#methode" class="nav-link">Méthode</a>
+        <a href="#secteurs" class="nav-link">Secteurs</a>
+        <a href="#equipe" class="nav-link">Équipe</a>
+        <a href="#offres" class="nav-link">Offres</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="https://alpha-nc.github.io/Audit-Agence-Creative/" target="_blank" rel="noopener" class="btn btn-primary btn-header">
+          Demander un audit stratégique
+        </a>
+        <button class="burger-btn" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="menu-overlay" id="menuOverlay" tabindex="-1" aria-hidden="true"></div>
+  <aside class="mobile-menu" id="mobileMenu" aria-label="Menu mobile">
+    <div class="mobile-top">
+      <div class="brand-group">
+        <img src="https://z-cdn-media.chatglm.cn/files/4865b8b1-f1e7-4a55-9116-e7069e92d95b.png?auth_key=1868766478-c457842d6c274d0788f83edb2b9f6a58-0-d319a15aaa33ab9badd3a3ded10439ae" alt="" class="brand-logo-img" />
+        <span class="brand-name">Alpha No_Code</span>
+      </div>
+      <button class="mobile-close" id="closeMenuBtn" aria-label="Fermer le menu">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+    </div>
+    <a href="#frictions" class="nav-link">Freins</a>
+    <a href="#methode" class="nav-link">Méthode</a>
+    <a href="#secteurs" class="nav-link">Secteurs</a>
+    <a href="#equipe" class="nav-link">Équipe</a>
+    <a href="#offres" class="nav-link">Offres</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+    <a href="https://calendly.com/agence-alphanc/audit-decouverte" target="_blank" rel="noopener" class="btn btn-primary mobile-cta">
+      Demander un audit stratégique
+    </a>
+  </aside>
+
+  <main id="main-content">
+
+    <!-- ── Hero ── -->
+    <section id="home" class="hero">
+      <div id="hero-vanta-bg" class="hero-vanta-bg" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <div class="container hero-shell">
+        <div class="hero-copy">
+          <span class="hero-eyebrow reveal-on-scroll">Pour agences, cabinets d'avocats et acteurs de l'immobilier</span>
+
+          <h1 class="hero-title reveal-on-scroll">
+            <span class="sr-only">La désorganisation opérationnelle grignote votre marge. On remet de l'ordre.</span>
+            <span class="hero-title-main" aria-hidden="true">La désorganisation<br>grignote votre marge.</span>
+            <span class="hero-title-accent" aria-hidden="true">On remet de l'ordre.</span>
+          </h1>
+
+          <p class="hero-lead reveal-on-scroll">
+            Alpha No_Code structure d'abord les process, automatise ensuite ce qui doit l'être.
+            Pour des entreprises de services qui veulent croître sans rajouter de la complexité.
+          </p>
+
+          <p class="hero-subline reveal-on-scroll">
+            <span>Moins de friction sur vos </span><span id="typewriter-text" class="typewriter-word"></span><span class="typewriter-cursor" aria-hidden="true">|</span>
+          </p>
+
+          <div class="hero-ctas reveal-on-scroll">
+            <a href="https://alpha-nc.github.io/Audit-Agence-Creative/" target="_blank" rel="noopener" class="btn btn-primary">
+              Demander un audit stratégique
+            </a>
+            <a href="#methode" class="btn btn-secondary-light">
+              Voir la méthode
+            </a>
+          </div>
+
+          <ul class="hero-tags reveal-on-scroll" aria-label="Bénéfices">
+            <li>Process fiabilisés</li>
+            <li>Automatisation utile</li>
+            <li>Créativité préservée</li>
+            <li>Sérénité retrouvée</li>
+          </ul>
+        </div>
+
+        <aside class="hero-panel reveal-on-scroll" aria-label="Bénéfices clés">
+          <div class="panel-card panel-card-primary">
+            <span class="panel-kicker">Ce que vous reprenez</span>
+            <h2>Visibilité, cadre et sérénité pour produire et scaler.</h2>
+            <p>On clarifie le fonctionnement réel, on pose les standards, on automatise le répétitif. L'équipe gagne en autonomie. La direction reprend le pilotage.</p>
+          </div>
+
+          <div class="panel-grid">
+            <article class="proof-card">
+              <span class="proof-value">3–5 h</span>
+              <p>récupérées par collaborateur et par semaine sur les tâches à faible valeur.</p>
+            </article>
+            <article class="proof-card">
+              <span class="proof-value">5 étapes</span>
+              <p>Du diagnostic aux premiers résultats concrets en moins de 30 jours.</p>
+            </article>
+          </div>
+
+          <div class="signal-card">
+            <span class="signal-label">Freins traités</span>
+            <ul>
+              <li>Demandes client floues et incomplètes</li>
+              <li>Validations dispersées sur plusieurs canaux</li>
+              <li>Versions qui s'accumulent sans règle</li>
+              <li>Suivi d'activité manuel et chronophage</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ── Stat Bar ── -->
+    <div class="stat-bar">
+      <div class="container stat-bar-inner">
+        <div class="stat-item reveal-on-scroll">
+          <span class="stat-value">10–20 %</span>
+          <span class="stat-label">du temps de production<br>perdu en rework non cadré</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item reveal-on-scroll">
+          <span class="stat-value" data-target="30" data-suffix=" j">30 j</span>
+          <span class="stat-label">pour les premiers<br>effets concrets</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item reveal-on-scroll">
+          <span class="stat-value" data-target="5" data-suffix="">5</span>
+          <span class="stat-label">étapes de la<br>méthode Alpha</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item reveal-on-scroll">
+          <span class="stat-value" data-target="3" data-suffix="">3</span>
+          <span class="stat-label">verticales<br>sectorielles</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Les freins ── -->
+    <section id="frictions" class="section section-light">
+      <div class="container">
+        <div class="section-heading reveal-on-scroll">
+          <span class="eyebrow eyebrow-dark">Le diagnostic</span>
+          <h2>Pas un manque d'outils. Une absence de cadre.</h2>
+          <p>Quand les demandes sont floues, que les validations vivent partout et que le suivi se fait à la main, l'équipe compense en permanence. La charge mentale monte, la marge se comprime, et la qualité dépend des efforts individuels plutôt que du système.</p>
+        </div>
+
+        <div class="friction-grid">
+          <article class="friction-card reveal-on-scroll">
+            <div class="icon-badge icon-danger"><i class="fa-solid fa-file-circle-question" aria-hidden="true"></i></div>
+            <h3>Demandes incomplètes</h3>
+            <p>Les demandes arrivent par mail, message vocal ou texto. Votre équipe passe plus de temps à reconstituer l'information qu'à produire.</p>
+          </article>
+          <article class="friction-card reveal-on-scroll">
+            <div class="icon-badge icon-danger"><i class="fa-solid fa-comments" aria-hidden="true"></i></div>
+            <h3>Validations dispersées</h3>
+            <p>Les retours arrivent partout sauf au bon endroit. Personne ne sait quelle version fait foi. Les litiges s'accumulent.</p>
+          </article>
+          <article class="friction-card reveal-on-scroll">
+            <div class="icon-badge icon-danger"><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i></div>
+            <h3>Corrections à répétition</h3>
+            <p>Sans règle de validation claire, chaque livrable repassera deux fois. Le rework grignote le temps et la marge sans que personne ne le mesure.</p>
+          </article>
+          <article class="friction-card reveal-on-scroll">
+            <div class="icon-badge icon-danger"><i class="fa-solid fa-chart-column" aria-hidden="true"></i></div>
+            <h3>Suivi d'activité artisanal</h3>
+            <p>Recopier les avancements chaque semaine au lieu de piloter. Le suivi devient une charge en soi, et l'information arrive toujours trop tard.</p>
+          </article>
+          <article class="friction-card reveal-on-scroll">
+            <div class="icon-badge icon-danger"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i></div>
+            <h3>Relances chronophages</h3>
+            <p>Les responsables passent leur semaine à demander des informations plutôt qu'à décider. L'opérationnel absorbe le stratégique.</p>
+          </article>
+          <article class="friction-card reveal-on-scroll">
+            <div class="icon-badge icon-danger"><i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i></div>
+            <h3>Informations éparpillées</h3>
+            <p>Les règles vivent dans les têtes, pas dans le système. La structure dépend des personnes clés. La croissance ajoute de la complexité.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Avant / Après ── -->
+    <section id="avantages" class="section section-soft">
+      <div class="container">
+        <div class="section-heading text-center reveal-on-scroll">
+          <span class="eyebrow eyebrow-dark">Avant / Après</span>
+          <h2>Quand le process tient, l'équipe peut enfin produire.</h2>
+          <p>Le but n'est pas d'automatiser pour automatiser. Le but est de rendre la production plus fiable, plus lisible et moins épuisante — pour que la créativité et la qualité aient l'espace qu'elles méritent.</p>
+        </div>
+
+        <div class="comparison-visual reveal-on-scroll">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&auto=format" alt="Espace de travail organisé" class="comparison-img" loading="lazy" />
+          <div class="comparison-visual-overlay"></div>
+          <span class="comparison-visual-label">Du désordre à la clarté</span>
+        </div>
+
+        <div class="comparison-layout">
+          <article class="comparison-card comparison-card-muted reveal-left">
+            <span class="comparison-label">Sans cadre structuré</span>
+            <ul class="comparison-list">
+              <li><span class="ci-icon" aria-hidden="true">✕</span>Les demandes arrivent sous toutes les formes, sans filtre.</li>
+              <li><span class="ci-icon" aria-hidden="true">✕</span>Les arbitrages reposent sur des rappels informels.</li>
+              <li><span class="ci-icon" aria-hidden="true">✕</span>Le suivi d'activité est bricolé à la main en fin de semaine.</li>
+              <li><span class="ci-icon" aria-hidden="true">✕</span>La gestion des versions dépend des personnes, pas des règles.</li>
+              <li><span class="ci-icon" aria-hidden="true">✕</span>La direction absorbe la friction au lieu de piloter.</li>
+              <li><span class="ci-icon" aria-hidden="true">✕</span>Grandir veut dire ajouter de la complexité.</li>
+            </ul>
+          </article>
+
+          <article class="comparison-card comparison-card-positive reveal-right">
+            <span class="comparison-label">Avec Alpha No_Code</span>
+            <ul class="comparison-list">
+              <li><span class="ci-icon" aria-hidden="true">✓</span>Les demandes entrent dans un format exploitable dès le départ.</li>
+              <li><span class="ci-icon" aria-hidden="true">✓</span>Les validations suivent une règle claire, traçable et respectée.</li>
+              <li><span class="ci-icon" aria-hidden="true">✓</span>Les bons statuts remontent au bon moment, automatiquement.</li>
+              <li><span class="ci-icon" aria-hidden="true">✓</span>Le suivi devient plus rapide, plus fiable, moins artisanal.</li>
+              <li><span class="ci-icon" aria-hidden="true">✓</span>Les équipes produisent avec plus de sérénité et moins de friction.</li>
+              <li><span class="ci-icon" aria-hidden="true">✓</span>Grandir veut dire absorber plus de volume avec le même cadre.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="benefit-strip reveal-on-scroll">
+          <div>
+            <strong>Résultats visés</strong>
+            <span>Moins de rework, meilleure visibilité, charge mentale réduite, base plus saine pour grandir et recruter.</span>
+          </div>
+          <a href="#offres" class="text-link">Voir les modalités d'accompagnement →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Verticales ── -->
+    <section id="secteurs" class="section section-white">
+      <div class="container">
+        <div class="section-heading text-center reveal-on-scroll">
+          <span class="eyebrow eyebrow-dark">Verticales sectorielles</span>
+          <h2>Chaque métier a ses freins. On les connaît.</h2>
+          <p>Demandes floues en agence, délais de procédure en droit, prospects perdus en immobilier. Notre approche s'adapte à votre réalité opérationnelle, vos outils et vos contraintes.</p>
+        </div>
+
+        <div class="verticals-grid">
+          <article class="vertical-card reveal-on-scroll">
+            <div class="vertical-icon" aria-hidden="true">
+              <i class="fa-solid fa-bullseye"></i>
+            </div>
+            <h3>Agences marketing, créatives &amp; web</h3>
+            <p>Demandes floues, validations sur cinq canaux, rework non facturé, intégration chaotique. On fiabilise le flux demande client vers production vers livraison sans bloquer la créativité.</p>
+            <a href="agences.html" class="vertical-link">
+              Voir cette verticale <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </article>
+
+          <article class="vertical-card reveal-on-scroll">
+            <div class="vertical-icon" aria-hidden="true">
+              <i class="fa-solid fa-scale-balanced"></i>
+            </div>
+            <h3>Cabinets d'avocats</h3>
+            <p>Délais de procédure mal suivis, dossiers éparpillés, facturation des honoraires tardive, conformité RGPD incomplète. On structure le fonctionnement du cabinet sans toucher à la pratique juridique.</p>
+            <a href="avocats.html" class="vertical-link">
+              Voir cette verticale <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </article>
+
+          <article class="vertical-card reveal-on-scroll">
+            <div class="vertical-icon" aria-hidden="true">
+              <i class="fa-solid fa-building"></i>
+            </div>
+            <h3>Immobilier &amp; promotion</h3>
+            <p>Suivi des prospects incomplet, relances manuelles, dossiers éparpillés entre plusieurs outils. On clarifie vos process commerciaux pour ne plus perdre d'opportunités dans l'administratif.</p>
+            <a href="immobilier.html" class="vertical-link">
+              Voir cette verticale <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Méthode Stepper ── -->
+    <section id="methode" class="section section-soft">
+      <div class="container">
+        <div class="method-header reveal-on-scroll">
+          <span class="eyebrow eyebrow-dark">Méthode Alpha No_Code</span>
+          <h2>Du désordre à un système clair.<br><span class="text-accent">Votre créativité reste libre.</span></h2>
+          <p>On part du fonctionnement réel, on sécurise vite les points les plus coûteux, puis on installe un cadre simple que l'équipe peut vraiment faire vivre — sans dépendance à nos services.</p>
+        </div>
+
+        <!-- Desktop stepper -->
+        <div class="stepper-wrapper reveal-on-scroll">
+          <nav class="stepper-nav" aria-label="Étapes de la méthode">
+            <button class="stepper-nav-item active" data-step="1" aria-pressed="true">
+              <span class="stepper-nav-num">01</span>
+              <span class="stepper-nav-label">On regarde</span>
+            </button>
+            <button class="stepper-nav-item" data-step="2" aria-pressed="false">
+              <span class="stepper-nav-num">02</span>
+              <span class="stepper-nav-label">On corrige vite</span>
+            </button>
+            <button class="stepper-nav-item" data-step="3" aria-pressed="false">
+              <span class="stepper-nav-num">03</span>
+              <span class="stepper-nav-label">On pose des règles</span>
+            </button>
+            <button class="stepper-nav-item" data-step="4" aria-pressed="false">
+              <span class="stepper-nav-num">04</span>
+              <span class="stepper-nav-label">On installe</span>
+            </button>
+            <button class="stepper-nav-item" data-step="5" aria-pressed="false">
+              <span class="stepper-nav-num">05</span>
+              <span class="stepper-nav-label">On améliore</span>
+            </button>
+          </nav>
+
+          <div class="stepper-content">
+            <article class="stepper-card active" data-step="1">
+              <div class="stepper-card-header">
+                <span class="stepper-card-num">01</span>
+                <h3 class="stepper-card-title">On regarde comment ça fonctionne</h3>
+              </div>
+              <p class="stepper-card-desc">On cartographie le fonctionnement réel et on repère ce qui coûte le plus cher à votre organisation.</p>
+              <ul class="stepper-card-list">
+                <li>Analyse complète du flux demande client vers production vers livraison</li>
+                <li>Identification des frictions qui compriment la marge</li>
+                <li>Les 3 priorités à traiter en urgence</li>
+                <li>Plan d'action 0-30 jours, concret et priorisé</li>
+              </ul>
+              <p class="stepper-card-result"><strong>Résultat :</strong> Vous savez exactement où agir en priorité pour récupérer du temps et de la marge.</p>
+            </article>
+
+            <article class="stepper-card" data-step="2">
+              <div class="stepper-card-header">
+                <span class="stepper-card-num">02</span>
+                <h3 class="stepper-card-title">On corrige ce qui coûte le plus, vite</h3>
+              </div>
+              <p class="stepper-card-desc">On élimine le répétitif visible en 30 jours. Les gains arrivent rapidement pour que l'équipe voit la différence tout de suite.</p>
+              <ul class="stepper-card-list">
+                <li>Demande client cadrée avec un formulaire structuré et exploitable</li>
+                <li>Validations propres, centralisées et traçables</li>
+                <li>Relances automatisées côté client et côté équipe</li>
+                <li>Suivi d'activité simplifié sur les points critiques</li>
+              </ul>
+              <p class="stepper-card-result"><strong>Résultat :</strong> Premiers gains visibles, équipe soulagée, confiance installée.</p>
+            </article>
+
+            <article class="stepper-card" data-step="3">
+              <div class="stepper-card-header">
+                <span class="stepper-card-num">03</span>
+                <h3 class="stepper-card-title">On pose des règles claires</h3>
+              </div>
+              <p class="stepper-card-desc">On standardise les demandes, les validations, la gestion des versions et le contrôle qualité. Le cadre devient documenté et reproductible.</p>
+              <ul class="stepper-card-list">
+                <li>Modèles réutilisables (demande, validation, livraison)</li>
+                <li>Règles de gestion des versions claires et appliquées</li>
+                <li>Listes de contrôle qualité intégrées au fonctionnement</li>
+                <li>Documentation simple pour que l'équipe soit autonome</li>
+              </ul>
+              <p class="stepper-card-result"><strong>Résultat :</strong> Socle stable pour intégrer de nouveaux collaborateurs, grandir et ne pas dépendre des personnes clés.</p>
+            </article>
+
+            <article class="stepper-card" data-step="4">
+              <div class="stepper-card-header">
+                <span class="stepper-card-num">04</span>
+                <h3 class="stepper-card-title">On installe et on forme l'équipe</h3>
+              </div>
+              <p class="stepper-card-desc">On intègre les solutions dans vos outils existants, on forme l'équipe et on sécurise la mise en place.</p>
+              <ul class="stepper-card-list">
+                <li>Intégration propre avec vos outils en place</li>
+                <li>Tests avant mise en place, plan de retour arrière si besoin</li>
+                <li>Formation de l'équipe pour garantir l'adoption</li>
+                <li>Automatisations ciblées sur les vrais points de blocage</li>
+              </ul>
+              <p class="stepper-card-result"><strong>Résultat :</strong> Mise en place maîtrisée, pas de surprise, équipe opérationnelle dès le départ.</p>
+            </article>
+
+            <article class="stepper-card" data-step="5">
+              <div class="stepper-card-header">
+                <span class="stepper-card-num">05</span>
+                <h3 class="stepper-card-title">On améliore dans la durée</h3>
+              </div>
+              <p class="stepper-card-desc">On pilote dans la durée, on traite les nouvelles frictions, et on évite que les anciennes habitudes reviennent.</p>
+              <ul class="stepper-card-list">
+                <li>1 friction traitée par itération, sur les vrais irritants</li>
+                <li>Automatisations utiles, pas gadget</li>
+                <li>Suivi des priorités opérationnelles mois après mois</li>
+                <li>Point mensuel de revue et d'ajustement du système</li>
+              </ul>
+              <p class="stepper-card-result"><strong>Résultat :</strong> Amélioration continue installée, sérénité durable, système qui tient sans vous.</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- Mobile accordion -->
+        <div class="stepper-accordion">
+          <div class="stepper-accordion-item" data-step="1">
+            <button class="stepper-accordion-trigger active" aria-expanded="true">
+              <span class="stepper-accordion-num">01</span>
+              <span class="stepper-accordion-label">On regarde comment ça fonctionne</span>
+              <span class="stepper-accordion-chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+            </button>
+            <div class="stepper-accordion-content active">
+              <p>Cartographie du fonctionnement réel et identification des frictions les plus coûteuses.</p>
+              <ul>
+                <li>Analyse complète du flux demande vers livraison</li>
+                <li>Identification des frictions prioritaires</li>
+                <li>Les 3 chantiers à traiter</li>
+                <li>Plan d'action 0-30 jours</li>
+              </ul>
+              <p class="stepper-accordion-result"><strong>Résultat :</strong> Vous savez exactement où agir.</p>
+            </div>
+          </div>
+          <div class="stepper-accordion-item" data-step="2">
+            <button class="stepper-accordion-trigger" aria-expanded="false">
+              <span class="stepper-accordion-num">02</span>
+              <span class="stepper-accordion-label">On corrige ce qui coûte le plus, vite</span>
+              <span class="stepper-accordion-chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+            </button>
+            <div class="stepper-accordion-content">
+              <p>Premiers gains visibles en 30 jours sur le répétitif le plus coûteux.</p>
+              <ul>
+                <li>Demande client structurée</li>
+                <li>Validations centralisées</li>
+                <li>Relances automatisées</li>
+                <li>Suivi d'activité simplifié</li>
+              </ul>
+            </div>
+          </div>
+          <div class="stepper-accordion-item" data-step="3">
+            <button class="stepper-accordion-trigger" aria-expanded="false">
+              <span class="stepper-accordion-num">03</span>
+              <span class="stepper-accordion-label">On pose des règles claires</span>
+              <span class="stepper-accordion-chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+            </button>
+            <div class="stepper-accordion-content">
+              <p>Modèles, règles de validation, gestion des versions et contrôle qualité documentés.</p>
+              <ul>
+                <li>Modèles réutilisables</li>
+                <li>Règles de gestion des versions</li>
+                <li>Listes de contrôle qualité</li>
+                <li>Documentation équipe</li>
+              </ul>
+            </div>
+          </div>
+          <div class="stepper-accordion-item" data-step="4">
+            <button class="stepper-accordion-trigger" aria-expanded="false">
+              <span class="stepper-accordion-num">04</span>
+              <span class="stepper-accordion-label">On installe et on forme l'équipe</span>
+              <span class="stepper-accordion-chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+            </button>
+            <div class="stepper-accordion-content">
+              <p>Intégration dans vos outils, formation et mise en place sécurisée.</p>
+              <ul>
+                <li>Intégration outils existants</li>
+                <li>Tests avant mise en place</li>
+                <li>Formation équipe</li>
+                <li>Plan de retour arrière</li>
+              </ul>
+            </div>
+          </div>
+          <div class="stepper-accordion-item" data-step="5">
+            <button class="stepper-accordion-trigger" aria-expanded="false">
+              <span class="stepper-accordion-num">05</span>
+              <span class="stepper-accordion-label">On améliore dans la durée</span>
+              <span class="stepper-accordion-chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+            </button>
+            <div class="stepper-accordion-content">
+              <p>Amélioration continue, traitement des nouvelles frictions, sérénité installée.</p>
+              <ul>
+                <li>1 friction par itération</li>
+                <li>Automatisations utiles</li>
+                <li>Suivi mensuel</li>
+                <li>Système qui tient sans vous</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="method-footer reveal-on-scroll">
+          <a href="https://alpha-nc.github.io/Audit-Agence-Creative/" target="_blank" rel="noopener" class="btn btn-primary">
+            Demander un audit stratégique
+          </a>
+          <a href="#offres" class="link-underline">Voir les offres détaillées</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Le fonctionnement (Do/Don't) ── -->
+    <section class="section section-dark">
+      <div class="container">
+        <div class="do-dont-header reveal-on-scroll">
+          <span class="eyebrow eyebrow-bright">Notre fonctionnement</span>
+          <h2>Ce qu'on fait.<br>Ce qu'on évite.</h2>
+          <p>Pour éviter les malentendus et garantir que l'accompagnement reste utile, documenté et maintenable par votre équipe — sans nous.</p>
+        </div>
+
+        <div class="do-dont-grid">
+          <div class="do-card reveal-on-scroll">
+            <h3 class="do-title">
+              <span class="do-icon" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
+              Ce qu'on fait
+            </h3>
+            <ul class="do-list">
+              <li>Auditer vos process existants sans jugement, en partant du réel.</li>
+              <li>Proposer des solutions simples, documentées et maintenables par votre équipe.</li>
+              <li>Automatiser ce qui a du sens — pas du gadget, pas de la technologie pour la technologie.</li>
+              <li>S'adapter à vos outils existants avant d'en proposer de nouveaux.</li>
+              <li>Poser un cadre de production sans normaliser votre valeur créative.</li>
+              <li>Accompagner jusqu'à l'autonomie complète de votre équipe.</li>
+            </ul>
+          </div>
+
+          <div class="dont-card reveal-on-scroll">
+            <h3 class="dont-title">
+              <span class="dont-icon" aria-hidden="true"><i class="fa-solid fa-xmark"></i></span>
+              Ce qu'on ne fait jamais
+            </h3>
+            <ul class="dont-list">
+              <li>Vendre des démonstrations technologiques impressionnantes sans utilité réelle.</li>
+              <li>Construire des systèmes complexes impossibles à maintenir sans nous.</li>
+              <li>Imposer des outils sans comprendre vos contraintes et votre culture.</li>
+              <li>Promettre des résultats magiques en deux semaines sans engagement de votre part.</li>
+              <li>Créer de la dépendance technique à nos services.</li>
+              <li>Toucher à votre identité créative ou à votre manière de travailler.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Qui sommes-nous ── -->
+    <section id="equipe" class="section section-white">
+      <div class="container">
+        <div class="section-heading text-center reveal-on-scroll">
+          <span class="eyebrow eyebrow-dark">L'équipe</span>
+          <h2>Trois associés. Trois expertises. Un seul objectif.</h2>
+          <p>Alpha No_Code est né d'une conviction commune : les problèmes de fonctionnement se règlent mieux quand on comprend le métier de l'intérieur.</p>
+        </div>
+
+        <div class="team-visual reveal-on-scroll">
+          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=80&auto=format" alt="Équipe Alpha No_Code en réunion de travail" class="team-photo" loading="lazy" />
+        </div>
+
+        <div class="team-grid">
+          <article class="team-card reveal-on-scroll">
+            <div class="team-card-icon-wrap" aria-hidden="true">
+              <i class="fa-solid fa-layer-group"></i>
+            </div>
+            <h3>Développement &amp; Automatisation</h3>
+            <span class="team-card-role">Agences créatives · Marketing · Web</span>
+            <p>Issu du monde des agences, il connaît les dysfonctionnements de l'intérieur. Il conçoit les outils et les automatisations qui simplifient le quotidien sans rigidifier la production.</p>
+          </article>
+
+          <article class="team-card reveal-on-scroll">
+            <div class="team-card-icon-wrap" aria-hidden="true">
+              <i class="fa-solid fa-building"></i>
+            </div>
+            <h3>Développement commercial</h3>
+            <span class="team-card-role">Immobilier · Promotion · Transaction</span>
+            <p>Ancré dans le secteur immobilier, il structure les processus commerciaux et pilote les relations clients. Il s'assure que chaque accompagnement correspond aux réalités du terrain.</p>
+          </article>
+
+          <article class="team-card reveal-on-scroll">
+            <div class="team-card-icon-wrap" aria-hidden="true">
+              <i class="fa-solid fa-scale-balanced"></i>
+            </div>
+            <h3>Droit &amp; Conformité</h3>
+            <span class="team-card-role">Droit des affaires · RGPD · Protection des données</span>
+            <p>Juriste de formation, il veille à ce que les systèmes qu'on installe respectent le cadre légal. Il intègre la conformité RGPD dès la conception et sécurise le traitement des données.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── RGPD & Conformité ── -->
+    <section class="section section-dark rgpd-section">
+      <div class="container">
+        <div class="rgpd-header reveal-on-scroll">
+          <span class="eyebrow eyebrow-bright">Conformité</span>
+          <h2>Vos données et celles de vos clients sont protégées dès la conception.</h2>
+          <p>Notre juriste associé intègre la conformité RGPD dans chaque système qu'on installe. Pas en option. Pas en fin de projet. Dès le départ.</p>
+        </div>
+
+        <div class="rgpd-grid">
+          <div class="rgpd-item reveal-on-scroll">
+            <div class="rgpd-item-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="rgpd-item-body">
+              <h3>Traitement des données conforme</h3>
+              <p>Chaque processus automatisé est conçu dans le respect du RGPD et du droit applicable. Aucune fonctionnalité n'est déployée sans analyse préalable des données traitées.</p>
+            </div>
+          </div>
+
+          <div class="rgpd-item reveal-on-scroll">
+            <div class="rgpd-item-icon" aria-hidden="true"><i class="fa-solid fa-earth-europe"></i></div>
+            <div class="rgpd-item-body">
+              <h3>Données hébergées en Europe</h3>
+              <p>On privilégie les outils hébergeant leurs données sur le territoire européen ou garantissant un niveau de protection équivalent.</p>
+            </div>
+          </div>
+
+          <div class="rgpd-item reveal-on-scroll">
+            <div class="rgpd-item-icon" aria-hidden="true"><i class="fa-solid fa-lock"></i></div>
+            <div class="rgpd-item-body">
+              <h3>Accès limité et tracé</h3>
+              <p>Les droits d'accès sont définis, documentés et limités au strict nécessaire. Chaque accès est justifié et révisé régulièrement.</p>
+            </div>
+          </div>
+
+          <div class="rgpd-item reveal-on-scroll">
+            <div class="rgpd-item-icon" aria-hidden="true"><i class="fa-solid fa-file-shield"></i></div>
+            <div class="rgpd-item-body">
+              <h3>Documentation et registre</h3>
+              <p>On vous aide à constituer ou mettre à jour votre registre des traitements si nécessaire, et à documenter les bases légales de chaque traitement.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Offres ── -->
+    <section id="offres" class="section section-white">
+      <div class="container">
+        <div class="section-heading text-center reveal-on-scroll">
+          <span class="eyebrow eyebrow-dark">Modalités</span>
+          <h2>Des formats simples pour clarifier, structurer et fiabiliser dans la durée.</h2>
+          <p>On commence par voir clair, puis on choisit le bon niveau d'intervention selon votre maturité opérationnelle et votre rythme.</p>
+        </div>
+
+        <div class="offers-grid">
+          <article class="offer-card offer-card-featured reveal-on-scroll">
+            <span class="offer-badge">Point d'entrée recommandé</span>
+            <h3>Audit stratégique</h3>
+            <p>Pour identifier rapidement ce qui freine la production et prioriser les bons chantiers avant d'agir.</p>
+            <ul class="offer-list">
+              <li>Entretien équipe (1 à 2h)</li>
+              <li>Analyse du flux demande vers production vers livraison</li>
+              <li>Cartographie des frictions prioritaires</li>
+              <li>Les 3 chantiers à traiter en urgence</li>
+              <li>Plan d'action 0-30 jours, concret et maintenable</li>
+            </ul>
+            <a href="https://alpha-nc.github.io/Audit-Agence-Creative/" target="_blank" rel="noopener" class="btn btn-primary">
+              Demander un audit stratégique
+            </a>
+          </article>
+
+          <article class="offer-card reveal-on-scroll">
+            <h3>Sprint de structuration</h3>
+            <p>Pour poser les standards de production et remettre de la fluidité dans le quotidien de l'équipe.</p>
+            <ul class="offer-list">
+              <li>Modèles de demandes, validations et livrables</li>
+              <li>Centralisation des informations utiles</li>
+              <li>Règles de gestion des versions et listes de contrôle qualité</li>
+              <li>Documentation pour l'autonomie de l'équipe</li>
+              <li>Formation et accompagnement à la prise en main</li>
+            </ul>
+            <a href="https://calendly.com/agence-alphanc/audit-decouverte" target="_blank" rel="noopener" class="btn btn-secondary">
+              Planifier un échange
+            </a>
+          </article>
+
+          <article class="offer-card reveal-on-scroll">
+            <h3>Accompagnement continu</h3>
+            <p>Pour améliorer le système mois après mois, traiter les nouveaux irritants et consolider les gains dans le temps.</p>
+            <ul class="offer-list">
+              <li>1 friction traitée par itération</li>
+              <li>Automatisations utiles et ciblées</li>
+              <li>Suivi des priorités opérationnelles</li>
+              <li>Point mensuel de revue et d'ajustement</li>
+              <li>Support sur les arbitrages de structuration</li>
+            </ul>
+            <a href="https://calendly.com/agence-alphanc/audit-decouverte" target="_blank" rel="noopener" class="btn btn-secondary">
+              Planifier un appel
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ROI ── -->
+    <section class="section section-dark roi-section">
+      <div class="container">
+        <div class="section-heading text-center reveal-on-scroll">
+          <span class="eyebrow eyebrow-bright">Valeur créée</span>
+          <h2>Ce que vous récupérez concrètement.</h2>
+          <p>Pas de promesse magique. Des effets observables sur ce qui compte vraiment : le temps, la marge et la capacité de votre équipe à grandir sans ajouter du désordre.</p>
+        </div>
+
+        <div class="roi-grid">
+          <article class="roi-card reveal-on-scroll">
+            <div class="roi-icon" aria-hidden="true"><i class="fa-regular fa-clock"></i></div>
+            <h3>Temps récupéré</h3>
+            <div class="roi-figure">15-25 % <span>du temps de production</span></div>
+            <p>Les tâches répétitives — relances manuelles, copier-coller, suivi d'activité artisanal — absorbent en moyenne entre un sixième et un quart du temps de production. Une fois cadrées et automatisées, elles libèrent la capacité là où elle a réellement de la valeur.</p>
+          </article>
+
+          <article class="roi-card roi-card-featured reveal-on-scroll">
+            <div class="roi-icon" aria-hidden="true"><i class="fa-solid fa-chart-line"></i></div>
+            <h3>Marge protégée</h3>
+            <div class="roi-figure">Moins de rework</div>
+            <p>Chaque correction inutile, chaque validation perdue et chaque retard non anticipé grignote directement vos marges. Un cadre clair sur les validations et la production réduit le rework et stabilise la rentabilité — sans changer votre tarification.</p>
+          </article>
+
+          <article class="roi-card reveal-on-scroll">
+            <div class="roi-icon" aria-hidden="true"><i class="fa-regular fa-lightbulb"></i></div>
+            <h3>Capacité à grandir</h3>
+            <div class="roi-figure">Sérénité retrouvée</div>
+            <p>Une équipe qui compense en permanence n'a pas la tête disponible pour grandir. Quand les process tiennent d'eux-mêmes, la direction pilote au lieu de gérer les urgences. La charge mentale baisse. La capacité à absorber du volume revient.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FAQ ── -->
+    <section id="faq" class="section section-light">
+      <div class="container faq-layout">
+        <div class="section-heading reveal-on-scroll">
+          <span class="eyebrow eyebrow-dark">Questions fréquentes</span>
+          <h2>Les questions qui reviennent avant de commencer.</h2>
+          <p>Si votre question n'est pas ici, contactez-nous directement.</p>
+        </div>
+
+        <div class="faq-list reveal-on-scroll">
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              À quel moment a-t-on intérêt à faire un audit ?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>Dès que la direction sent que l'équipe compense trop — demandes floues, validations dispersées, retards à répétition, suivi d'activité manuel, difficulté à grandir sans rajouter de la complexité. L'audit permet de savoir précisément où agir avant de tout changer.</p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              Est-ce que vous imposez de nouveaux outils ?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>Non. La priorité est d'exploiter correctement ce qui existe déjà, puis d'ajouter uniquement ce qui simplifie réellement le système. On ne change pas d'outil pour changer d'outil.</p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              Est-ce que l'automatisation va rigidifier notre façon de travailler ?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>Non. On automatise le répétitif et on clarifie les points de passage administratifs. La création garde tout son espace — mais dans un cadre plus fiable et moins épuisant. Le but est de donner plus de place à la créativité, pas moins.</p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              Combien de temps faut-il pour voir des effets concrets ?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>Les premiers effets apparaissent souvent dès les premières semaines sur les gains immédiats. Le vrai bénéfice — la stabilité du système — se consolide ensuite avec les standards et les ajustements dans le temps. On vise des résultats durables, pas une démonstration éphémère.</p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              Est-ce qu'on devient dépendants de vous après l'accompagnement ?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>Non, c'est exactement l'inverse de notre philosophie. Tout ce qu'on installe est documenté, formé et pensé pour que votre équipe soit autonome. L'accompagnement continu est une option, pas une obligation. L'objectif est que le système tienne sans nous.</p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              Est-ce adapté à notre taille d'entreprise ?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>On intervient principalement auprès de structures de 5 à 50 personnes — suffisamment petites pour qu'un changement de méthode ait un impact immédiat, suffisamment grandes pour ressentir le poids de l'organisation fragile. Si votre équipe compense en permanence les lacunes du système, la taille n'est pas le critère déterminant. L'audit permet de confirmer si une intervention a du sens chez vous.</p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              Quel est l'investissement à prévoir ?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>L'audit stratégique est le premier point de contact. Il est calibré pour être accessible et apporter une valeur concrète dès la restitution. Le Sprint et l'accompagnement continu se définissent ensuite selon l'ampleur des chantiers identifiés. On adapte toujours l'intervention à ce qui a du sens selon votre situation.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA Final ── -->
+    <section class="section cta-section">
+      <div class="container cta-panel reveal-on-scroll">
+        <div>
+          <span class="eyebrow eyebrow-bright">Prochaine étape</span>
+          <h2>On commence par voir clair<br>sur vos frictions.</h2>
+          <p>On regarde votre fonctionnement actuel, on identifie les frictions les plus coûteuses et on pose un cadre plus sain pour produire — sans casser votre manière de travailler.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="https://calendly.com/agence-alphanc/audit-decouverte" target="_blank" rel="noopener" class="btn btn-primary">
+            Demander un audit stratégique
+          </a>
+          <a href="https://alpha-nc.github.io/Audit-Agence-Creative/" target="_blank" rel="noopener" class="btn btn-secondary-light">
+            Voir le détail de l'audit
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="#home" class="brand-group footer-brand" aria-label="Alpha No_Code — Accueil">
+          <img src="https://z-cdn-media.chatglm.cn/files/4865b8b1-f1e7-4a55-9116-e7069e92d95b.png?auth_key=1868766478-c457842d6c274d0788f83edb2b9f6a58-0-d319a15aaa33ab9badd3a3ded10439ae" alt="Alpha No_Code" class="brand-logo-img" />
+          <span class="brand-name">Alpha No_Code</span>
+        </a>
+        <p class="footer-copy">On remet de l'ordre dans les process avant d'automatiser. Pour des entreprises de services qui veulent grandir sans ajouter du désordre.</p>
+      </div>
+      <div>
+        <h3>Navigation</h3>
+        <ul class="footer-links">
+          <li><a href="#frictions">Freins</a></li>
+          <li><a href="#methode">Méthode</a></li>
+          <li><a href="#secteurs">Secteurs</a></li>
+          <li><a href="#equipe">Équipe</a></li>
+          <li><a href="#offres">Offres</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul class="footer-links">
+          <li><a href="mailto:contact@alpha-nc.com">contact@alpha-nc.com</a></li>
+          <li><a href="https://calendly.com/agence-alphanc/audit-decouverte" target="_blank" rel="noopener">Planifier un échange</a></li>
+          <li><a href="https://alpha-nc.github.io/Audit-Agence-Creative/" target="_blank" rel="noopener">Demander un audit stratégique</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Alpha No_Code. Tous droits réservés.</span>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

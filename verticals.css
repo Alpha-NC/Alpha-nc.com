@@ -1,0 +1,283 @@
+/* ============================================================
+   ALPHA NO_CODE — Verticals CSS
+   Styles spécifiques aux pages sectorielles
+   Dépend de style.css (variables, reset, composants partagés)
+   ============================================================ */
+
+/* ── Hero Vertical ────────────────────────────────────────── */
+.page-hero {
+  position: relative;
+  background: var(--product-bg);
+  overflow: hidden;
+  padding: 0;
+}
+.page-hero-vanta {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.page-hero-vanta.vanta-fallback {
+  background:
+    radial-gradient(ellipse at 20% 60%, rgba(11, 160, 143, 0.20), transparent 52%),
+    radial-gradient(ellipse at 80% 20%, rgba(0, 229, 168, 0.09), transparent 44%),
+    var(--product-bg);
+}
+.page-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(130deg, rgba(11,16,32,0.84) 0%, rgba(11,16,32,0.56) 55%, rgba(11,16,32,0.30) 100%);
+}
+.page-hero-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 60px;
+  align-items: center;
+  padding: 100px 0 90px;
+}
+
+/* Left copy */
+.page-hero-copy { display: flex; flex-direction: column; }
+.page-hero-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(234, 240, 255, 0.45);
+  margin-bottom: 20px;
+}
+.page-hero-breadcrumb a {
+  color: rgba(234, 240, 255, 0.45);
+  transition: color var(--t);
+}
+.page-hero-breadcrumb a:hover { color: var(--product-accent); }
+.page-hero-breadcrumb span { color: rgba(234, 240, 255, 0.28); }
+
+.page-hero-eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--product-accent);
+  background: rgba(0, 229, 168, 0.08);
+  border: 1px solid rgba(0, 229, 168, 0.18);
+  border-radius: var(--r-pill);
+  padding: 5px 14px;
+  width: fit-content;
+  margin-bottom: 26px;
+}
+.page-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(30px, 4.2vw, 58px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.06;
+  color: var(--text-on-dark);
+  margin-bottom: 22px;
+}
+.page-hero-title span {
+  background: linear-gradient(90deg, var(--product-accent), var(--brand-teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.page-hero-lead {
+  font-size: 16px;
+  color: var(--text-muted-dark);
+  line-height: 1.76;
+  max-width: 540px;
+  margin-bottom: 36px;
+}
+.page-hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* Right panel — hero stats */
+.page-hero-panel { display: flex; flex-direction: column; gap: 12px; }
+.page-hero-stat {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line-dark);
+  border-radius: var(--r-md);
+  padding: 22px 20px;
+  backdrop-filter: blur(8px);
+  transition: border-color var(--t);
+}
+.page-hero-stat:hover { border-color: rgba(11, 160, 143, 0.22); }
+.page-hero-stat-kicker {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(234, 240, 255, 0.38);
+  margin-bottom: 8px;
+}
+.page-hero-stat-value {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--product-accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.page-hero-stat-desc {
+  font-size: 13px;
+  color: var(--text-muted-dark);
+  line-height: 1.58;
+}
+
+/* ── Proof Strip ──────────────────────────────────────────── */
+.proof-strip {
+  background: var(--bg-white);
+  border-bottom: 1px solid var(--line-soft);
+}
+.proof-strip-inner {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+.proof-strip-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 30px 50px;
+  text-align: center;
+  flex: 1;
+  border-right: 1px solid var(--line-soft);
+}
+.proof-strip-item:last-child { border-right: 0; }
+.proof-strip-value {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--brand-deep);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.proof-strip-label {
+  font-size: 12px;
+  color: var(--text-soft);
+  line-height: 1.45;
+  text-align: center;
+}
+
+/* ── Sector Frictions ─────────────────────────────────────── */
+.sector-frictions-intro {
+  max-width: 680px;
+  margin-bottom: 56px;
+}
+.sector-frictions-intro h2 { font-size: clamp(24px, 3vw, 42px); font-weight: 800; margin-bottom: 14px; }
+.sector-frictions-intro p { font-size: 16px; color: var(--text-soft); line-height: 1.72; }
+
+/* ── Sector Method ────────────────────────────────────────── */
+.sector-method-intro {
+  max-width: 640px;
+  margin-bottom: 56px;
+}
+.sector-method-intro h2 { font-size: clamp(24px, 3vw, 42px); font-weight: 800; margin-bottom: 14px; }
+.sector-method-intro p { font-size: 16px; color: var(--text-soft); line-height: 1.72; }
+
+/* Simple 5-step method grid for vertical pages */
+.method-grid-simple {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+.method-card-simple {
+  background: var(--bg-white);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-md);
+  padding: 24px 20px;
+  transition: all var(--t);
+  position: relative;
+  overflow: hidden;
+}
+.method-card-simple::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2.5px;
+  background: linear-gradient(90deg, var(--brand-teal), var(--product-accent));
+}
+.method-card-simple:hover {
+  border-color: rgba(11, 160, 143, 0.22);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+.method-step {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--brand-teal);
+  display: block;
+  margin-bottom: 12px;
+}
+.method-card-simple h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+.method-card-simple p { font-size: 13px; color: var(--text-soft); line-height: 1.65; }
+
+/* ── Sector CTA ───────────────────────────────────────────── */
+.sector-cta {
+  background:
+    radial-gradient(ellipse at 10% 40%, rgba(0, 229, 168, 0.14), transparent 36%),
+    radial-gradient(ellipse at 90% 70%, rgba(11, 160, 143, 0.10), transparent 40%),
+    var(--product-bg);
+  padding: 100px 0;
+}
+.sector-cta-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: center;
+}
+.sector-cta-inner h2 {
+  font-size: clamp(22px, 2.8vw, 38px);
+  font-weight: 800;
+  color: var(--text-on-dark);
+  margin-bottom: 14px;
+  letter-spacing: -0.03em;
+}
+.sector-cta-inner p { font-size: 15.5px; color: var(--text-muted-dark); line-height: 1.72; }
+.sector-cta-actions { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+
+/* ── Responsive Verticals ─────────────────────────────────── */
+@media (max-width: 1100px) {
+  .page-hero-inner { grid-template-columns: 1fr; gap: 0; }
+  .page-hero-panel { display: none; }
+  .method-grid-simple { grid-template-columns: repeat(3, 1fr); }
+  .proof-strip-item { padding: 24px 28px; }
+  .sector-cta-inner { grid-template-columns: 1fr; }
+  .sector-cta-actions { flex-direction: row; align-items: center; }
+}
+
+@media (max-width: 768px) {
+  .page-hero-inner { padding: 64px 0 60px; }
+  .page-hero-title { font-size: clamp(28px, 8vw, 42px); }
+  .proof-strip-inner { flex-wrap: wrap; }
+  .proof-strip-item { width: 50%; border-bottom: 1px solid var(--line-soft); }
+  .proof-strip-item:nth-child(2n) { border-right: 0; }
+  .method-grid-simple { grid-template-columns: 1fr 1fr; }
+  .page-hero-ctas { flex-direction: column; }
+  .sector-cta-actions { flex-direction: column; width: 100%; }
+  .sector-cta-actions .btn { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 500px) {
+  .proof-strip-item { width: 100%; border-right: 0; }
+  .method-grid-simple { grid-template-columns: 1fr; }
+}
