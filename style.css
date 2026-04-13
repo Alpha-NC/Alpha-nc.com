@@ -54,7 +54,7 @@
   --r-pill: 999px;
 
   /* Layout */
-  --container:         1360px;
+  --container:         1680px;
 
   /* Transitions */
   --t:      220ms ease;
@@ -102,7 +102,7 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font-heading); line-height: 1.08;
 
 /* ── Layout ───────────────────────────────────────────────── */
 .container {
-  width: min(var(--container), calc(100% - 48px));
+  width: min(var(--container), calc(100% - 40px));
   margin: 0 auto;
 }
 .section { position: relative; padding: 120px 0; }
