@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculateur ROI | Alpha No_Code</title>
+  <meta name="description" content="Estimez le temps et les marges que vous pouvez récupérer en structurant vos process. Calculateur gratuit par Alpha No_Code." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+
+  <style>
+    /* ── Tokens charte ── */
+    :root {
+      --brand-deep:    #11707C;
+      --brand-teal:    #0BA08F;
+      --brand-mid:     #0E8886;
+      --brand-soft:    #B0D8D7;
+      --coral:         #FF8F5C;
+      --coral-soft:    #FFB694;
+      --bg:            #0B1020;
+      --card:          #101A33;
+      --card2:         #0D1428;
+      --accent:        #00E5A8;
+      --danger:        #FF5A7A;
+      --text-on-dark:  #EAF0FF;
+      --text-muted:    rgba(234, 240, 255, 0.65);
+      --text-xmuted:   rgba(234, 240, 255, 0.38);
+      --line:          rgba(234, 240, 255, 0.08);
+      --line-teal:     rgba(0, 229, 168, 0.18);
+      --glow:          rgba(0, 229, 168, 0.08);
+      --font-h:        "Montserrat", sans-serif;
+      --font-b:        "Inter", sans-serif;
+      --font-m:        "IBM Plex Mono", monospace;
+      --r:             14px;
+      --r-lg:          20px;
+      --r-xl:          28px;
+      --t:             220ms ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-b);
+      background: var(--bg);
+      color: var(--text-on-dark);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── Background atmosphère ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 10% 20%, rgba(11,160,143,0.10), transparent),
+        radial-gradient(ellipse 50% 40% at 90% 80%, rgba(0,229,168,0.06), transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Header ── */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(11, 16, 32, 0.90);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--line);
+      padding: 0 40px;
+    }
+    .header-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+      font-family: var(--font-h); font-weight: 800; font-size: 14.5px;
+      color: #fff;
+    }
+    .brand img { width: 28px; height: 28px; object-fit: contain; }
+    .back-link {
+      font-size: 12.5px; font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 6px;
+      transition: color var(--t);
+    }
+    .back-link:hover { color: var(--accent); }
+
+    /* ── Layout ── */
+    .page {
+      position: relative; z-index: 1;
+      max-width: 1100px; margin: 0 auto;
+      padding: 60px 40px 100px;
+    }
+
+    /* ── Hero section ── */
+    .hero {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-m); font-size: 10px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(0,229,168,0.08); border: 1px solid rgba(0,229,168,0.18);
+      border-radius: 999px; padding: 5px 14px 5px 10px;
+      margin-bottom: 24px;
+    }
+    .hero-badge::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--accent); border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+    .hero h1 {
+      font-family: var(--font-h);
+      font-size: clamp(28px, 4vw, 52px);
+      font-weight: 900; letter-spacing: -0.04em; line-height: 1.06;
+      color: var(--text-on-dark); margin-bottom: 18px;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--brand-teal) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero p {
+      font-size: 16.5px; color: var(--text-muted); line-height: 1.72;
+      max-width: 580px; margin: 0 auto;
+    }
+
+    /* ── Main grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--r-xl);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--brand-teal), transparent);
+      opacity: 0.6;
+    }
+    .card-title {
+      font-family: var(--font-m); font-size: 10px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text-xmuted); margin-bottom: 28px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card-title::before {
+      content: ''; width: 16px; height: 1.5px;
+      background: var(--brand-teal); flex-shrink: 0;
+    }
+
+    /* ── Form inputs ── */
+    .field { margin-bottom: 24px; }
+    .field:last-child { margin-bottom: 0; }
+    .field label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: var(--text-muted); margin-bottom: 10px; line-height: 1.4;
+    }
+    .field label span {
+      display: block; font-size: 11.5px; font-weight: 400;
+      color: var(--text-xmuted); margin-top: 2px;
+    }
+
+    .input-group { position: relative; }
+    .input-group .prefix, .input-group .suffix {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      font-family: var(--font-m); font-size: 12px; font-weight: 500;
+      color: var(--text-xmuted); pointer-events: none;
+    }
+    .input-group .prefix { left: 16px; }
+    .input-group .suffix { right: 16px; }
+
+    input[type="number"], input[type="range"] {
+      width: 100%; font-family: var(--font-b); font-size: 15px;
+      background: rgba(0,0,0,0.16); border: 1px solid rgba(0,0,0,0.10);
+      border-radius: var(--r); color: var(--text-on-dark);
+      transition: border-color var(--t), background var(--t);
+    }
+    input[type="number"] {
+      padding: 13px 16px; outline: none;
+      -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    .has-prefix input[type="number"] { padding-left: 36px; }
+    .has-suffix input[type="number"] { padding-right: 50px; }
+    input[type="number"]:focus {
+      border-color: rgba(0,229,168,0.40);
+      background: rgba(0,229,168,0.04);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0,229,168,0.10);
+    }
+
+    /* Slider */
+    .slider-row { display: flex; align-items: center; gap: 14px; }
+    .slider-value {
+      font-family: var(--font-m); font-size: 15px; font-weight: 700;
+      color: var(--accent); min-width: 52px; text-align: right;
+      flex-shrink: 0;
+    }
+    input[type="range"] {
+      flex: 1; height: 6px; border-radius: 999px; cursor: pointer;
+      appearance: none; -webkit-appearance: none;
+      background: rgba(234,240,255,0.10);
+      border: none; outline: none;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--accent); cursor: pointer;
+      box-shadow: 0 0 0 3px rgba(0,229,168,0.20);
+      transition: box-shadow var(--t), transform var(--t);
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      box-shadow: 0 0 0 6px rgba(0,229,168,0.20);
+      transform: scale(1.1);
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--accent); border: none; cursor: pointer;
+    }
+
+    /* ── Sector selector ── */
+    .sector-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;
+      margin-bottom: 0;
+    }
+    .sector-btn {
+      background: rgba(234,240,255,0.04);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 12px 10px;
+      cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 7px;
+      transition: all var(--t);
+      font-family: var(--font-b);
+    }
+    .sector-btn i { font-size: 18px; color: var(--text-xmuted); transition: color var(--t); }
+    .sector-btn span { font-size: 11px; font-weight: 500; color: var(--text-muted); text-align: center; line-height: 1.3; }
+    .sector-btn:hover { border-color: var(--line-teal); }
+    .sector-btn.active {
+      background: rgba(0,229,168,0.08);
+      border-color: rgba(0,229,168,0.30);
+    }
+    .sector-btn.active i { color: var(--accent); }
+    .sector-btn.active span { color: var(--text-on-dark); }
+
+    /* ── Results card ── */
+    .results-card {
+      background: linear-gradient(135deg, rgba(0,229,168,0.08) 0%, rgba(11,160,143,0.04) 100%);
+      border-color: rgba(0,229,168,0.20);
+    }
+    .results-card::before { opacity: 1; }
+
+    .result-main {
+      display: flex; flex-direction: column; gap: 4px;
+      margin-bottom: 32px; padding-bottom: 28px;
+      border-bottom: 1px solid var(--line);
+    }
+    .result-main-label {
+      font-family: var(--font-m); font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-xmuted);
+    }
+    .result-main-value {
+      font-family: var(--font-h);
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 900; letter-spacing: -0.04em; line-height: 1;
+      color: var(--accent);
+    }
+    .result-main-sub {
+      font-size: 13.5px; color: var(--text-muted); margin-top: 6px;
+    }
+
+    .result-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      margin-bottom: 28px;
+    }
+    .result-item {
+      background: rgba(0,0,0,0.18); border-radius: var(--r);
+      padding: 18px 16px; border: 1px solid var(--line);
+      position: relative; overflow: hidden;
+    }
+    .result-item::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      opacity: 0.4;
+    }
+    .result-item.teal::before { background: var(--accent); }
+    .result-item.coral::before { background: var(--coral); }
+    .result-item.violet::before { background: var(--brand-violet, #8B7FE8); }
+    .result-item.mid::before { background: var(--brand-mid); }
+
+    .result-label {
+      font-family: var(--font-m); font-size: 9.5px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--text-xmuted); margin-bottom: 8px; display: block;
+    }
+    .result-val {
+      font-family: var(--font-h); font-size: 22px; font-weight: 800;
+      letter-spacing: -0.03em; line-height: 1; color: var(--text-on-dark);
+    }
+    .result-val.accent { color: var(--accent); }
+    .result-val.coral  { color: var(--coral); }
+    .result-val.violet { color: #8B7FE8; }
+    .result-sub { font-size: 11.5px; color: var(--text-xmuted); margin-top: 5px; line-height: 1.4; }
+
+    /* ROI bar */
+    .roi-bar-section { margin-bottom: 28px; }
+    .roi-bar-label {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 10px;
+    }
+    .roi-bar-label span { font-size: 12.5px; color: var(--text-muted); font-weight: 500; }
+    .roi-bar-label strong { font-family: var(--font-m); font-size: 14px; color: var(--accent); font-weight: 700; }
+    .roi-bar-track {
+      height: 8px; background: rgba(234,240,255,0.08);
+      border-radius: 999px; overflow: hidden;
+    }
+    .roi-bar-fill {
+      height: 100%; border-radius: 999px;
+      background: linear-gradient(90deg, var(--brand-teal), var(--accent));
+      transition: width 600ms cubic-bezier(0.22, 0.68, 0, 1.2);
+    }
+
+    /* Payback */
+    .payback-row {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(0,0,0,0.14); border: 1px solid var(--line);
+      border-radius: var(--r); padding: 14px 16px;
+      margin-bottom: 24px;
+    }
+    .payback-icon {
+      width: 36px; height: 36px; border-radius: var(--r);
+      background: rgba(0,229,168,0.10); border: 1px solid rgba(0,229,168,0.18);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: var(--accent); flex-shrink: 0;
+    }
+    .payback-text { flex: 1; }
+    .payback-text strong {
+      display: block; font-size: 13.5px; font-weight: 700;
+      color: var(--text-on-dark); margin-bottom: 2px;
+    }
+    .payback-text span { font-size: 12px; color: var(--text-muted); }
+
+    /* CTA */
+    .cta-btn {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; padding: 16px 24px;
+      background: linear-gradient(135deg, var(--brand-deep) 0%, var(--brand-teal) 100%);
+      color: #fff; border-radius: var(--r-lg);
+      font-family: var(--font-h); font-size: 14px; font-weight: 700;
+      text-decoration: none; border: 0; cursor: pointer;
+      box-shadow: 0 4px 24px rgba(11,160,143,0.30);
+      transition: all var(--t);
+    }
+    .cta-btn:hover {
+      background: linear-gradient(135deg, var(--brand-teal) 0%, var(--accent) 100%);
+      box-shadow: 0 8px 32px rgba(0,229,168,0.30);
+      transform: translateY(-1px);
+    }
+    .cta-btn i { font-size: 15px; }
+
+    /* Disclaimer */
+    .disclaimer {
+      margin-top: 14px;
+      font-size: 11.5px; color: var(--text-xmuted);
+      text-align: center; line-height: 1.55;
+    }
+
+    /* Hypotheses */
+    .hypotheses {
+      margin-top: 28px;
+      background: rgba(0,0,0,0.14);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 20px;
+    }
+    .hypotheses-title {
+      font-family: var(--font-m); font-size: 9.5px; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--text-xmuted); margin-bottom: 14px;
+    }
+    .hypotheses ul { display: flex; flex-direction: column; gap: 6px; }
+    .hypotheses li {
+      font-size: 12px; color: var(--text-muted);
+      display: flex; align-items: flex-start; gap: 8px; line-height: 1.5;
+    }
+    .hypotheses li::before {
+      content: '→'; color: var(--brand-teal); font-size: 11px;
+      flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      position: relative; z-index: 1;
+      border-top: 1px solid var(--line);
+      padding: 28px 40px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px;
+    }
+    .footer a {
+      font-size: 12.5px; color: var(--text-muted);
+      text-decoration: none; transition: color var(--t);
+    }
+    .footer a:hover { color: var(--accent); }
+    .footer span { color: var(--text-xmuted); font-size: 12px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      .page { padding: 40px 20px 80px; }
+      .header { padding: 0 20px; }
+    }
+    @media (max-width: 480px) {
+      .result-grid { grid-template-columns: 1fr; }
+      .sector-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <img src="https://z-cdn-media.chatglm.cn/files/4865b8b1-f1e7-4a55-9116-e7069e92d95b.png?auth_key=1868766478-c457842d6c274d0788f83edb2b9f6a58-0-d319a15aaa33ab9badd3a3ded10439ae" alt="Alpha No_Code" />
+        Alpha No_Code
+      </a>
+      <a href="index.html" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i> Retour au site
+      </a>
+    </div>
+  </header>
+
+  <!-- ── Page ── -->
+  <main class="page">
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-badge">Outil gratuit</div>
+      <h1>Estimez votre <span>gain potentiel</span></h1>
+      <p>Renseignez vos données opérationnelles et obtenez une estimation concrète du temps et des marges récupérables grâce à la structuration de vos process.</p>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid">
+
+      <!-- Inputs -->
+      <div>
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-title">Votre activité</div>
+
+          <div class="field">
+            <label>Secteur <span>Adapte les hypothèses à votre métier</span></label>
+            <div class="sector-grid">
+              <button class="sector-btn active" data-sector="agence" onclick="setSector(this)">
+                <i class="fa-solid fa-bullseye"></i>
+                <span>Agence créative</span>
+              </button>
+              <button class="sector-btn" data-sector="avocat" onclick="setSector(this)">
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span>Cabinet d'avocats</span>
+              </button>
+              <button class="sector-btn" data-sector="immo" onclick="setSector(this)">
+                <i class="fa-solid fa-building"></i>
+                <span>Immobilier</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Paramètres de calcul</div>
+
+          <div class="field">
+            <label>Nombre de collaborateurs <span>Équipe concernée par les process opérationnels</span></label>
+            <div class="slider-row">
+              <input type="range" id="collab" min="1" max="50" value="8" oninput="updateSlider('collab','collabVal'); calculate()" />
+              <span class="slider-value" id="collabVal">8</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Heures travaillées par semaine et par personne</label>
+            <div class="slider-row">
+              <input type="range" id="heures" min="20" max="60" value="40" oninput="updateSlider('heures','heuresVal'); calculate()" />
+              <span class="slider-value" id="heuresVal">40 h</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Coût horaire moyen (chargé) <span>Salaire brut + charges / 1 820 h annuelles</span></label>
+            <div class="input-group has-suffix">
+              <input type="number" id="coutH" value="45" min="15" max="300" oninput="calculate()" />
+              <span class="suffix">€/h</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Taux de marge brute moyen <span>Proportion de chiffre d'affaires conservée en marge</span></label>
+            <div class="slider-row">
+              <input type="range" id="marge" min="10" max="80" value="35" oninput="updateSlider('marge','margeVal'); calculate()" />
+              <span class="slider-value" id="margeVal">35 %</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Chiffre d'affaires annuel estimé <span>Optionnel — affine le calcul de marge protégée</span></label>
+            <div class="input-group has-suffix">
+              <input type="number" id="ca" value="400000" min="0" step="10000" oninput="calculate()" />
+              <span class="suffix">€</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="card results-card">
+        <div class="card-title">Estimation de votre gain</div>
+
+        <div class="result-main">
+          <span class="result-main-label">Temps récupérable / an</span>
+          <span class="result-main-value" id="res-temps">—</span>
+          <span class="result-main-sub" id="res-temps-sub"></span>
+        </div>
+
+        <div class="result-grid">
+          <div class="result-item teal">
+            <span class="result-label">Économie / an</span>
+            <div class="result-val accent" id="res-eco">—</div>
+            <div class="result-sub">sur coûts opérationnels</div>
+          </div>
+          <div class="result-item coral">
+            <span class="result-label">Marge protégée</span>
+            <div class="result-val coral" id="res-marge">—</div>
+            <div class="result-sub">correctifs & pertes évitées</div>
+          </div>
+          <div class="result-item mid">
+            <span class="result-label">Gain / collaborateur</span>
+            <div class="result-val" id="res-perso">—</div>
+            <div class="result-sub">heures/an par personne</div>
+          </div>
+          <div class="result-item violet">
+            <span class="result-label">Gain total estimé</span>
+            <div class="result-val violet" id="res-total">—</div>
+            <div class="result-sub">temps + marge cumulés</div>
+          </div>
+        </div>
+
+        <div class="roi-bar-section">
+          <div class="roi-bar-label">
+            <span>ROI estimé de l'intervention</span>
+            <strong id="res-roi">— %</strong>
+          </div>
+          <div class="roi-bar-track">
+            <div class="roi-bar-fill" id="roi-bar" style="width:0%"></div>
+          </div>
+        </div>
+
+        <div class="payback-row">
+          <div class="payback-icon"><i class="fa-regular fa-clock"></i></div>
+          <div class="payback-text">
+            <strong id="res-payback">Amortissement en — semaines</strong>
+            <span>Dès le Sprint de structuration (30 jours)</span>
+          </div>
+        </div>
+
+        <a href="https://alpha-nc.github.io/Audit-Agence-Creative/" target="_blank" rel="noopener" class="cta-btn">
+          <i class="fa-solid fa-arrow-right"></i>
+          Valider ces chiffres avec un audit stratégique
+        </a>
+        <p class="disclaimer">Estimation indicative basée sur des moyennes sectorielles. Un audit confirme les chiffres réels de votre organisation.</p>
+
+        <div class="hypotheses">
+          <div class="hypotheses-title">Hypothèses utilisées</div>
+          <ul id="hypotheses-list">
+            <li>15 à 20 % du temps opérationnel perdu en tâches non-cadrées (relances, validations, copier-coller)</li>
+            <li>8 à 12 % du CA en correctifs non facturés et pertes d'opportunités</li>
+            <li>Récupération progressive : 50 % dès le Sprint, 80 % à 3 mois</li>
+            <li>Investissement moyen estimé : Audit + Sprint de structuration</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <a href="index.html">Alpha No_Code</a>
+    <span>·</span>
+    <a href="index.html#offres">Voir les offres</a>
+    <span>·</span>
+    <a href="https://calendly.com/agence-alphanc/audit-decouverte" target="_blank">Prendre rendez-vous</a>
+  </footer>
+
+  <script>
+    // ── Paramètres sectoriels
+    const SECTORS = {
+      agence: {
+        tempsPct:     0.18,   // 18% du temps perdu
+        correctifPct: 0.10,   // 10% du CA en correctifs
+        label: 'Agences créatives & web',
+        hypotheses: [
+          'Demandes client incomplètes, validations sur 5 canaux, correctifs non facturés',
+          '10 à 12 % du CA estimé en révisions non cadrées et pertes de facturation',
+          'Intégrations sans cadre = 4 à 6 semaines de montée en charge par recrue',
+          'Récupération cible : 15 à 20 % du temps de production'
+        ]
+      },
+      avocat: {
+        tempsPct:     0.16,
+        correctifPct: 0.08,
+        label: 'Cabinets d\'avocats',
+        hypotheses: [
+          'Délais de procédure non tracés, dossiers éparpillés, facturation tardive',
+          '8 à 10 % du CA en honoraires non facturés ou perdus par manque de suivi',
+          'Conformité RGPD incomplète = risque opérationnel et légal non quantifié',
+          'Récupération cible : 12 à 18 % du temps administratif'
+        ]
+      },
+      immo: {
+        tempsPct:     0.17,
+        correctifPct: 0.09,
+        label: 'Immobilier & promotion',
+        hypotheses: [
+          'Suivi des prospects incomplet, relances manuelles, dossiers éparpillés',
+          '9 à 11 % du CA en opportunités perdues par manque de système de suivi',
+          'Intégration des négociateurs longue sans processus documenté',
+          'Récupération cible : 3 à 5h par collaborateur et par semaine'
+        ]
+      }
+    };
+
+    let currentSector = 'agence';
+
+    function setSector(btn) {
+      document.querySelectorAll('.sector-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentSector = btn.dataset.sector;
+      updateHypotheses();
+      calculate();
+    }
+
+    function updateHypotheses() {
+      const list = document.getElementById('hypotheses-list');
+      list.innerHTML = SECTORS[currentSector].hypotheses
+        .map(h => `<li>${h}</li>`).join('');
+    }
+
+    function updateSlider(id, valId) {
+      const el = document.getElementById(id);
+      const val = document.getElementById(valId);
+      if (id === 'heures') val.textContent = el.value + ' h';
+      else if (id === 'marge') val.textContent = el.value + ' %';
+      else val.textContent = el.value;
+
+      // Gradient fill
+      const pct = (el.value - el.min) / (el.max - el.min) * 100;
+      el.style.background = `linear-gradient(90deg, #0BA08F ${pct}%, rgba(234,240,255,0.10) ${pct}%)`;
+    }
+
+    function fmt(n) {
+      return new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 }).format(n);
+    }
+    function fmtCur(n) {
+      return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
+    }
+
+    function calculate() {
+      const collab  = parseInt(document.getElementById('collab').value)   || 8;
+      const heures  = parseInt(document.getElementById('heures').value)   || 40;
+      const coutH   = parseFloat(document.getElementById('coutH').value)  || 45;
+      const margePct= parseInt(document.getElementById('marge').value)    || 35;
+      const ca      = parseFloat(document.getElementById('ca').value)     || 0;
+
+      const s = SECTORS[currentSector];
+
+      // Heures perdues par an
+      const hParAn       = heures * 52;
+      const hPerduTotal  = collab * hParAn * s.tempsPct;
+      const hPerduParP   = hParAn * s.tempsPct;
+
+      // Économie sur coût salarial
+      const ecoSalaire = hPerduTotal * coutH;
+
+      // Marge protégée via correctifs évités
+      const margeCA    = ca > 0 ? ca * s.correctifPct : collab * coutH * heures * 52 * 0.3 * s.correctifPct * 10;
+      const margeGain  = margeCA * (margePct / 100);
+
+      // Total gain
+      const total = ecoSalaire + margeGain;
+
+      // ROI (investissement estimé : Audit 900€ + Sprint 2800€ en moyenne)
+      const invest = 900 + 2800 + collab * 120; // approximatif
+      const roi    = (total / invest) * 100;
+      const paybackWeeks = Math.round(invest / (total / 52));
+
+      // Update DOM
+      document.getElementById('res-temps').textContent = fmt(Math.round(hPerduTotal)) + ' h';
+      document.getElementById('res-temps-sub').textContent =
+        `soit ${fmt(Math.round(hPerduTotal / collab))} h/an par collaborateur · ${fmt(Math.round(hPerduTotal / 52))} h/sem récupérables`;
+      document.getElementById('res-eco').textContent   = fmtCur(ecoSalaire);
+      document.getElementById('res-marge').textContent = fmtCur(margeGain);
+      document.getElementById('res-perso').textContent = fmt(Math.round(hPerduParP)) + ' h';
+      document.getElementById('res-total').textContent = fmtCur(total);
+      document.getElementById('res-roi').textContent   = fmt(Math.round(roi)) + ' %';
+
+      // Bar (capped at 100% visually)
+      const barPct = Math.min(roi / 5, 100);
+      document.getElementById('roi-bar').style.width = barPct + '%';
+
+      const pw = paybackWeeks < 1 ? 'Moins d\'1 semaine' : `Amortissement en ${paybackWeeks} semaine${paybackWeeks > 1 ? 's' : ''}`;
+      document.getElementById('res-payback').textContent = pw;
+    }
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+      ['collab','heures','marge'].forEach(id => {
+        const suffix = id === 'heures' ? ' h' : id === 'marge' ? ' %' : '';
+        const el = document.getElementById(id);
+        document.getElementById(id + 'Val').textContent = el.value + suffix;
+        const pct = (el.value - el.min) / (el.max - el.min) * 100;
+        el.style.background = `linear-gradient(90deg, #0BA08F ${pct}%, rgba(234,240,255,0.10) ${pct}%)`;
+      });
+      updateHypotheses();
+      calculate();
+    });
+  </script>
+</body>
+</html>

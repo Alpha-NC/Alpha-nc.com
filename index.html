@@ -18,6 +18,16 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <svg style="position:absolute;width:0;height:0" aria-hidden="true">
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.80" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feBlend in="SourceGraphic" mode="multiply"/>
+    </filter>
+  </svg>
   <a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
   <!-- ── Header ── -->
@@ -35,6 +45,9 @@
         <a href="#equipe" class="nav-link">Équipe</a>
         <a href="#offres" class="nav-link">Offres</a>
         <a href="#faq" class="nav-link">FAQ</a>
+        <a href="calculateur-roi.html" class="nav-link nav-link-roi" aria-label="Calculateur ROI">
+          <i class="fa-solid fa-calculator" aria-hidden="true"></i> Simulateur
+        </a>
       </nav>
 
       <div class="header-actions">
@@ -65,12 +78,18 @@
     <a href="#equipe" class="nav-link">Équipe</a>
     <a href="#offres" class="nav-link">Offres</a>
     <a href="#faq" class="nav-link">FAQ</a>
+    <a href="calculateur-roi.html" class="nav-link">
+      <i class="fa-solid fa-calculator" aria-hidden="true"></i> Simulateur ROI
+    </a>
     <a href="https://calendly.com/agence-alphanc/audit-decouverte" target="_blank" rel="noopener" class="btn btn-primary mobile-cta">
       Demander un audit stratégique
     </a>
   </aside>
 
   <main id="main-content">
+
+    <!-- ── Hero + Stat bar + Ticker : wrapper 100svh ── -->
+    <div class="hero-viewport">
 
     <!-- ── Hero ── -->
     <section id="home" class="hero">
@@ -82,14 +101,15 @@
           <span class="hero-eyebrow reveal-on-scroll">Pour agences, cabinets d'avocats et acteurs de l'immobilier</span>
 
           <h1 class="hero-title reveal-on-scroll">
-            <span class="sr-only">La désorganisation opérationnelle grignote votre marge. On remet de l'ordre.</span>
-            <span class="hero-title-main" aria-hidden="true">La désorganisation<br>grignote votre marge.</span>
-            <span class="hero-title-accent" aria-hidden="true">On remet de l'ordre.</span>
+            <span class="sr-only">Structurez vos opérations, accélérez votre croissance.</span>
+            <span class="hero-title-main" aria-hidden="true">Structurez vos opérations,</span>
+            <span class="hero-title-accent" aria-hidden="true">accélérez votre croissance.</span>
           </h1>
 
           <p class="hero-lead reveal-on-scroll">
-            Alpha No_Code structure d'abord les process, automatise ensuite ce qui doit l'être.
-            Pour des entreprises de services qui veulent croître sans rajouter de la complexité.
+            Alpha No_Code libère votre performance et automatise vos process.
+            Votre organisation est perfectible, nous la transformons en gains concrets.
+            Voyons autour d'un audit gratuit ce que l'on peut construire ensemble.
           </p>
 
           <p class="hero-subline reveal-on-scroll">
@@ -115,6 +135,7 @@
 
         <aside class="hero-panel reveal-on-scroll" aria-label="Bénéfices clés">
           <div class="panel-card panel-card-primary">
+            <div class="panel-shimmer" aria-hidden="true"></div>
             <span class="panel-kicker">Ce que vous reprenez</span>
             <h2>Visibilité, cadre et sérénité pour produire et scaler.</h2>
             <p>On clarifie le fonctionnement réel, on pose les standards, on automatise le répétitif. L'équipe gagne en autonomie. La direction reprend le pilotage.</p>
@@ -149,7 +170,7 @@
       <div class="container stat-bar-inner">
         <div class="stat-item reveal-on-scroll">
           <span class="stat-value">10–20 %</span>
-          <span class="stat-label">du temps de production<br>perdu en correctifs non cadrés</span>
+          <span class="stat-label">du temps de production<br>récupéré</span>
         </div>
         <div class="stat-divider" aria-hidden="true"></div>
         <div class="stat-item reveal-on-scroll">
@@ -161,20 +182,48 @@
           <span class="stat-value" data-target="5" data-suffix="">5</span>
           <span class="stat-label">étapes de la<br>méthode Alpha</span>
         </div>
-        <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat-item reveal-on-scroll">
-          <span class="stat-value" data-target="3" data-suffix="">3</span>
-          <span class="stat-label">verticales<br>sectorielles</span>
+      </div>
+    </div>
+
+    <!-- ── Ticker ── -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <div class="ticker-inner">
+          <span class="ticker-item highlight">Délais tracés</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">Correctifs éliminés</span><span class="ticker-sep">·</span>
+          <span class="ticker-item highlight">30 jours</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">Marge protégée</span><span class="ticker-sep">·</span>
+          <span class="ticker-item highlight">5 étapes</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">Équipe autonome</span><span class="ticker-sep">·</span>
+          <span class="ticker-item highlight">RGPD conforme</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">Visibilité retrouvée</span><span class="ticker-sep">·</span>
+          <span class="ticker-item highlight">Sans dépendance</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">Process fiabilisés</span><span class="ticker-sep">·</span>
+        </div>
+        <div class="ticker-inner" aria-hidden="true">
+          <span class="ticker-item highlight">Délais tracés</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">Correctifs éliminés</span><span class="ticker-sep">·</span>
+          <span class="ticker-item highlight">30 jours</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">Marge protégée</span><span class="ticker-sep">·</span>
+          <span class="ticker-item highlight">5 étapes</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">Équipe autonome</span><span class="ticker-sep">·</span>
+          <span class="ticker-item highlight">RGPD conforme</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">Visibilité retrouvée</span><span class="ticker-sep">·</span>
+          <span class="ticker-item highlight">Sans dépendance</span><span class="ticker-sep">·</span>
+          <span class="ticker-item">Process fiabilisés</span><span class="ticker-sep">·</span>
         </div>
       </div>
     </div>
 
+    </div><!-- /.hero-viewport -->
+
     <!-- ── Les freins ── -->
     <section id="frictions" class="section section-light">
       <div class="container">
+        <span class="section-num" aria-hidden="true">01</span>
         <div class="section-heading reveal-on-scroll">
           <span class="eyebrow eyebrow-dark">Le diagnostic</span>
-          <h2>Pas un manque d'outils. Une absence de cadre.</h2>
+          <h2>Pas un manque d'outils.<br><span class="text-accent">Une absence de cadre.</span></h2>
           <p>Quand les demandes sont floues, que les validations vivent partout et que le suivi se fait à la main, l'équipe compense en permanence. La charge mentale monte, la marge se comprime, et la qualité dépend des efforts individuels plutôt que du système.</p>
         </div>
 
@@ -216,9 +265,10 @@
     <!-- ── Avant / Après ── -->
     <section id="avantages" class="section section-soft">
       <div class="container">
-        <div class="section-heading text-center reveal-on-scroll">
+        <span class="section-num" aria-hidden="true">02</span>
+        <div class="section-heading reveal-on-scroll">
           <span class="eyebrow eyebrow-dark">Avant / Après</span>
-          <h2>Quand le process tient, l'équipe peut enfin produire.</h2>
+          <h2>Quand le process tient,<br><span class="text-accent">l'équipe peut enfin produire.</span></h2>
           <p>Le but n'est pas d'automatiser pour automatiser. Le but est de rendre la production plus fiable, plus lisible et moins épuisante, pour que la créativité et la qualité aient l'espace qu'elles méritent.</p>
         </div>
 
@@ -267,9 +317,10 @@
     <!-- ── Verticales ── -->
     <section id="secteurs" class="section section-white">
       <div class="container">
-        <div class="section-heading text-center reveal-on-scroll">
+        <span class="section-num" aria-hidden="true">03</span>
+        <div class="section-heading reveal-on-scroll">
           <span class="eyebrow eyebrow-dark">Verticales sectorielles</span>
-          <h2>Chaque métier a ses freins. On les connaît.</h2>
+          <h2>Chaque métier a ses freins.<br><span class="text-accent">On les connaît.</span></h2>
           <p>Demandes floues en agence, délais de procédure en droit, prospects perdus en immobilier. Notre approche s'adapte à votre réalité opérationnelle, vos outils et vos contraintes.</p>
         </div>
 
@@ -313,6 +364,7 @@
     <!-- ── Méthode Stepper ── -->
     <section id="methode" class="section section-soft">
       <div class="container">
+        <span class="section-num" aria-hidden="true">04</span>
         <div class="method-header reveal-on-scroll">
           <span class="eyebrow eyebrow-dark">Méthode Alpha No_Code</span>
           <h2>Du désordre à un système clair.<br><span class="text-accent">Votre créativité reste libre.</span></h2>
@@ -521,7 +573,7 @@
       <div class="container">
         <div class="do-dont-header reveal-on-scroll">
           <span class="eyebrow eyebrow-bright">Notre fonctionnement</span>
-          <h2>Ce qu'on fait.<br>Ce qu'on évite.</h2>
+          <h2>Ce qu'on fait.<br><span class="text-accent">Ce qu'on évite.</span></h2>
           <p>Pour éviter les malentendus et garantir que l'accompagnement reste utile, documenté et maintenable par votre équipe, sans nous.</p>
         </div>
 
@@ -562,14 +614,14 @@
     <!-- ── Qui sommes-nous ── -->
     <section id="equipe" class="section section-white">
       <div class="container">
-        <div class="section-heading text-center reveal-on-scroll">
+        <div class="section-heading reveal-on-scroll">
           <span class="eyebrow eyebrow-dark">L'équipe</span>
-          <h2>Trois associés. Trois expertises. Un seul objectif.</h2>
+          <h2>Trois associés. Trois expertises.<br><span class="text-accent">Un seul objectif.</span></h2>
           <p>Alpha No_Code est né d'une conviction commune : les problèmes de fonctionnement se règlent mieux quand on comprend le métier de l'intérieur.</p>
         </div>
 
         <div class="team-visual reveal-on-scroll">
-          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=80&auto=format" alt="Équipe Alpha No_Code en réunion de travail" class="team-photo" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=85&auto=format&fit=crop&crop=faces,center" alt="Équipe Alpha No_Code en réunion de travail" class="team-photo" loading="lazy" />
         </div>
 
         <div class="team-grid">
@@ -608,7 +660,7 @@
       <div class="container">
         <div class="rgpd-header reveal-on-scroll">
           <span class="eyebrow eyebrow-bright">Conformité</span>
-          <h2>Vos données et celles de vos clients sont protégées dès la conception.</h2>
+          <h2>Vos données sont protégées<br><span class="text-accent">dès la conception.</span></h2>
           <p>Notre juriste associé intègre la conformité RGPD dans chaque système qu'on installe. Pas en option. Pas en fin de projet. Dès le départ.</p>
         </div>
 
@@ -651,9 +703,10 @@
     <!-- ── Offres ── -->
     <section id="offres" class="section section-white">
       <div class="container">
-        <div class="section-heading text-center reveal-on-scroll">
+        <span class="section-num" aria-hidden="true">05</span>
+        <div class="section-heading reveal-on-scroll">
           <span class="eyebrow eyebrow-dark">Modalités</span>
-          <h2>Des formats simples pour clarifier, structurer et fiabiliser dans la durée.</h2>
+          <h2>Des formats simples pour clarifier,<br><span class="text-accent">structurer et fiabiliser.</span></h2>
           <p>On commence par voir clair, puis on choisit le bon niveau d'intervention selon votre maturité opérationnelle et votre rythme.</p>
         </div>
 
@@ -710,9 +763,9 @@
     <!-- ── ROI ── -->
     <section class="section section-dark roi-section">
       <div class="container">
-        <div class="section-heading text-center reveal-on-scroll">
+        <div class="section-heading reveal-on-scroll">
           <span class="eyebrow eyebrow-bright">Valeur créée</span>
-          <h2>Ce que vous récupérez concrètement.</h2>
+          <h2>Ce que vous récupérez<br><span class="text-accent">concrètement.</span></h2>
           <p>Pas de promesse magique. Des effets observables sur ce qui compte vraiment : le temps, la marge et la capacité de votre équipe à grandir sans ajouter du désordre.</p>
         </div>
 
@@ -738,6 +791,14 @@
             <p>Une équipe qui compense en permanence n'a pas la tête disponible pour grandir. Quand les process tiennent d'eux-mêmes, la direction pilote au lieu de gérer les urgences. La charge mentale baisse. La capacité à absorber du volume revient.</p>
           </article>
         </div>
+
+        <div class="roi-cta-block reveal-on-scroll">
+          <p>Ces chiffres parlent de vous ? Estimez précisément ce que vous pouvez récupérer selon votre situation.</p>
+          <a href="calculateur-roi.html" class="btn btn-primary btn-roi-calc">
+            <i class="fa-solid fa-calculator" aria-hidden="true"></i>
+            Calculer mon retour sur investissement
+          </a>
+        </div>
       </div>
     </section>
 
@@ -746,7 +807,7 @@
       <div class="container faq-layout">
         <div class="section-heading reveal-on-scroll">
           <span class="eyebrow eyebrow-dark">Questions fréquentes</span>
-          <h2>Les questions qui reviennent avant de commencer.</h2>
+          <h2>Les questions qui reviennent<br><span class="text-accent">avant de commencer.</span></h2>
           <p>Si votre question n'est pas ici, contactez-nous directement.</p>
         </div>
 
@@ -829,7 +890,7 @@
       <div class="container cta-panel reveal-on-scroll">
         <div>
           <span class="eyebrow eyebrow-bright">Prochaine étape</span>
-          <h2>On commence par voir clair<br>sur vos frictions.</h2>
+          <h2>On commence par voir clair<br><span class="text-accent">sur vos frictions.</span></h2>
           <p>On regarde votre fonctionnement actuel, on identifie les frictions les plus coûteuses et on pose un cadre plus sain pour produire, sans casser votre manière de travailler.</p>
         </div>
         <div class="cta-actions">
@@ -846,37 +907,65 @@
 
   <!-- ── Footer ── -->
   <footer class="site-footer">
+
+    <!-- Ligne décorative teal en haut -->
+    <div class="footer-topline" aria-hidden="true"></div>
+
+    <!-- Ghost text décoratif -->
+    <span class="footer-ghost" aria-hidden="true">Alpha</span>
+
     <div class="container footer-grid">
-      <div>
+
+      <!-- Colonne 1 — Brand -->
+      <div class="footer-col-brand reveal-on-scroll">
         <a href="#home" class="brand-group footer-brand" aria-label="Alpha No_Code, Accueil">
           <img src="https://z-cdn-media.chatglm.cn/files/4865b8b1-f1e7-4a55-9116-e7069e92d95b.png?auth_key=1868766478-c457842d6c274d0788f83edb2b9f6a58-0-d319a15aaa33ab9badd3a3ded10439ae" alt="Alpha No_Code" class="brand-logo-img" />
           <span class="brand-name">Alpha No_Code</span>
         </a>
         <p class="footer-copy">On remet de l'ordre dans les process avant d'automatiser. Pour des entreprises de services qui veulent grandir sans ajouter du désordre.</p>
+        <a href="https://alpha-nc.github.io/Audit-Agence-Creative/" target="_blank" rel="noopener" class="btn btn-primary footer-cta">
+          Demander un audit stratégique
+        </a>
       </div>
-      <div>
-        <h3>Navigation</h3>
+
+      <!-- Colonne 2 — Navigation -->
+      <div class="footer-col reveal-on-scroll" style="--reveal-delay: 80ms">
+        <h3 class="footer-col-title">Navigation</h3>
         <ul class="footer-links">
-          <li><a href="#frictions">Freins</a></li>
-          <li><a href="#methode">Méthode</a></li>
+          <li><a href="#frictions">Les freins</a></li>
+          <li><a href="#methode">Méthode Alpha</a></li>
           <li><a href="#secteurs">Secteurs</a></li>
-          <li><a href="#equipe">Équipe</a></li>
+          <li><a href="#equipe">L'équipe</a></li>
           <li><a href="#offres">Offres</a></li>
           <li><a href="#faq">FAQ</a></li>
+          <li><a href="calculateur-roi.html" class="footer-link-accent">Simulateur ROI <span aria-hidden="true">→</span></a></li>
         </ul>
       </div>
-      <div>
-        <h3>Contact</h3>
+
+      <!-- Colonne 3 — Contact + Légal -->
+      <div class="footer-col reveal-on-scroll" style="--reveal-delay: 160ms">
+        <h3 class="footer-col-title">Contact</h3>
         <ul class="footer-links">
           <li><a href="mailto:contact@alpha-nc.com">contact@alpha-nc.com</a></li>
           <li><a href="https://calendly.com/agence-alphanc/audit-decouverte" target="_blank" rel="noopener">Planifier un échange</a></li>
-          <li><a href="https://alpha-nc.github.io/Audit-Agence-Creative/" target="_blank" rel="noopener">Demander un audit stratégique</a></li>
+        </ul>
+
+        <h3 class="footer-col-title footer-col-title--spaced">Légal</h3>
+        <ul class="footer-links">
+          <li><a href="#">Mentions légales</a></li>
+          <li><a href="#">Politique de confidentialité</a></li>
+          <li><a href="#">RGPD &amp; données</a></li>
         </ul>
       </div>
+
     </div>
+
+    <!-- Barre de bas de page -->
     <div class="container footer-bottom">
       <span>© 2026 Alpha No_Code. Tous droits réservés.</span>
+      <span class="footer-bottom-tagline">Conseil opérationnel · No-Code · Automatisation</span>
     </div>
+
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>

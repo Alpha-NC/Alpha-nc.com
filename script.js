@@ -176,15 +176,24 @@ function initStepper() {
   const cards    = document.querySelectorAll('.stepper-card');
   if (!navItems.length || !cards.length) return;
 
+  const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+
+  function activateStep(step) {
+    navItems.forEach(n => { n.classList.remove('active'); n.setAttribute('aria-pressed', 'false'); });
+    cards.forEach(c => c.classList.remove('active'));
+    const activeNav = document.querySelector(`.stepper-nav-item[data-step="${step}"]`);
+    const activeCard = document.querySelector(`.stepper-card[data-step="${step}"]`);
+    if (activeNav) { activeNav.classList.add('active'); activeNav.setAttribute('aria-pressed', 'true'); }
+    if (activeCard) activeCard.classList.add('active');
+  }
+
   navItems.forEach(item => {
+    // Hover sur desktop, clic sur touch
+    item.addEventListener('mouseenter', () => {
+      if (!isTouchDevice) activateStep(item.dataset.step);
+    });
     item.addEventListener('click', () => {
-      const step = item.dataset.step;
-      navItems.forEach(n => { n.classList.remove('active'); n.setAttribute('aria-pressed', 'false'); });
-      cards.forEach(c => c.classList.remove('active'));
-      item.classList.add('active');
-      item.setAttribute('aria-pressed', 'true');
-      const target = document.querySelector(`.stepper-card[data-step="${step}"]`);
-      if (target) target.classList.add('active');
+      activateStep(item.dataset.step);
     });
   });
 }
@@ -344,3 +353,70 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.addEventListener('resize', onResize, { passive: true });
+
+// ── Custom Cursor ──────────────────────────────────────────
+(function initCursor() {
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursorRing');
+  if (!cursor || !ring) return;
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+
+  let mouseX = 0, mouseY = 0;
+  let ringX  = 0, ringY  = 0;
+
+  // Sections dark (teal cursor) vs claires (brand-deep cursor)
+  const DARK_SELECTORS = '.hero, .stat-bar, .ticker, .section-dark, .rgpd-section, .cta-section, .site-footer, .mobile-menu';
+
+  function updateCursorTheme(x, y) {
+    const el = document.elementFromPoint(x, y);
+    if (!el) return;
+    const isDark = !!el.closest(DARK_SELECTORS);
+    cursor.classList.toggle('cursor-light', !isDark);
+    ring.classList.toggle('cursor-light', !isDark);
+  }
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top  = mouseY + 'px';
+    updateCursorTheme(mouseX, mouseY);
+  });
+
+  // Ring suit avec inertie rAF
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    ring.style.left = ringX + 'px';
+    ring.style.top  = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  const interactives = document.querySelectorAll(
+    'a, button, .vertical-card, .offer-card, .team-card, .friction-card, .faq-question'
+  );
+  interactives.forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('cursor-ring-hover'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('cursor-ring-hover'));
+  });
+})();
+
+// ── Scroll Progress ────────────────────────────────────────
+(function initScrollProgress() {
+  const bar = document.getElementById('scrollProgress');
+  if (!bar) return;
+  window.addEventListener('scroll', () => {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const pct   = total > 0 ? (window.scrollY / total) * 100 : 0;
+    bar.style.width = pct + '%';
+  }, { passive: true });
+})();
+
+// ── Header scroll state ────────────────────────────────────
+(function initHeaderScroll() {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+})();
