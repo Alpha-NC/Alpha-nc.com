@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RGPD &amp; données | Alpha No_Code</title>
+  <meta name="description" content="Détail des traitements de données personnelles pratiqués par Alpha No_Code, conformément au RGPD." />
+  <meta name="robots" content="noindex, follow" />
+  <meta property="og:title" content="RGPD &amp; données | Alpha No_Code" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:url" content="https://alpha-nc.fr/rgpd" />
+  <meta property="og:site_name" content="Alpha No_Code" />
+  <link rel="canonical" href="https://alpha-nc.fr/rgpd" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .legal-hero {
+      background: var(--product-bg);
+      padding: 120px 0 64px;
+      border-bottom: 1px solid rgba(0,229,168,0.12);
+    }
+    .legal-hero .eyebrow { color: var(--product-accent); }
+    .legal-hero h1 {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 900;
+      color: var(--text-on-dark);
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+    .legal-hero p {
+      color: var(--text-muted-dark);
+      font-size: 15px;
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+    }
+    .legal-body {
+      background: var(--bg-white);
+      padding: 80px 0 120px;
+    }
+    .legal-content { max-width: 800px; }
+    .legal-section { margin-bottom: 56px; }
+    .legal-section h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .legal-section h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      margin-top: 24px;
+    }
+    .legal-section p, .legal-section li {
+      font-size: 15px;
+      color: var(--text-soft);
+      line-height: 1.80;
+      margin-bottom: 10px;
+    }
+    .legal-section ul { list-style: disc; padding-left: 20px; }
+    .legal-section a { color: var(--brand-teal); text-decoration: underline; text-underline-offset: 3px; }
+    .treatment-card {
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-lg);
+      padding: 28px 32px;
+      margin-bottom: 20px;
+      background: var(--bg-main);
+    }
+    .treatment-card h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 0;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .treatment-card h3::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--product-accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .treatment-meta {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 8px 16px;
+      font-size: 14px;
+    }
+    .treatment-meta dt {
+      font-weight: 700;
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding-top: 2px;
+    }
+    .treatment-meta dd {
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+    .rgpd-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,229,168,0.08);
+      border: 1px solid rgba(0,229,168,0.20);
+      color: var(--product-accent);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: var(--r-pill);
+      margin-bottom: 32px;
+    }
+    .placeholder {
+      background: rgba(255,143,92,0.10);
+      color: var(--brand-coral);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+    @media (max-width: 640px) {
+      .treatment-meta { grid-template-columns: 1fr; }
+      .treatment-meta dt { margin-top: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header class="site-header" id="site-header">
+    <div class="container header-bar">
+      <a href="index.html" class="brand-group" aria-label="Alpha No_Code, Accueil">
+        <img src="https://z-cdn-media.chatglm.cn/files/4865b8b1-f1e7-4a55-9116-e7069e92d95b.png?auth_key=1868766478-c457842d6c274d0788f83edb2b9f6a58-0-d319a15aaa33ab9badd3a3ded10439ae" alt="Alpha No_Code" class="brand-logo-img" />
+        <span class="brand-name">Alpha No_Code</span>
+      </a>
+      <nav class="nav-menu" aria-label="Navigation principale">
+        <a href="index.html#frictions" class="nav-link">Freins</a>
+        <a href="index.html#methode" class="nav-link">Méthode</a>
+        <a href="index.html#equipe" class="nav-link">Équipe</a>
+        <a href="index.html#offres" class="nav-link">Offres</a>
+        <a href="index.html#faq" class="nav-link">FAQ</a>
+      </nav>
+      <div class="header-actions">
+        <a href="https://calendly.com/agence-alphanc/audit-decouverte" target="_blank" rel="noopener" class="btn btn-primary btn-header">
+          Demander un audit
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Hero légal ── -->
+  <section class="legal-hero">
+    <div class="container">
+      <span class="eyebrow eyebrow-bright">Conformité</span>
+      <h1>RGPD &amp; données</h1>
+      <p>Dernière mise à jour : avril 2026</p>
+    </div>
+  </section>
+
+  <!-- ── Contenu ── -->
+  <main class="legal-body">
+    <div class="container legal-content">
+
+      <span class="rgpd-badge">
+        <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+        Conforme au Règlement (UE) 2016/679 — RGPD
+      </span>
+
+      <div class="legal-section">
+        <h2>Engagement</h2>
+        <p>
+          Alpha No_Code s'engage à traiter vos données personnelles avec rigueur, transparence et dans le strict respect du Règlement Général sur la Protection des Données (RGPD), en vigueur depuis le 25 mai 2018.
+        </p>
+        <p>
+          Cette page présente le registre simplifié des traitements pratiqués par Alpha No_Code. Pour toute question, contactez-nous à <a href="mailto:contact@alpha-nc.fr">contact@alpha-nc.fr</a>.
+        </p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Registre des traitements</h2>
+
+        <div class="treatment-card">
+          <h3>Prise de contact et prise de rendez-vous</h3>
+          <dl class="treatment-meta">
+            <dt>Données</dt>
+            <dd>Nom, prénom, adresse email, message libre, créneaux sélectionnés</dd>
+            <dt>Source</dt>
+            <dd>Formulaire du site, Calendly</dd>
+            <dt>Finalité</dt>
+            <dd>Répondre aux demandes entrantes, organiser des échanges de découverte</dd>
+            <dt>Base légale</dt>
+            <dd>Intérêt légitime (art. 6.1.f RGPD) / Exécution d'un contrat précontractuel (art. 6.1.b)</dd>
+            <dt>Durée</dt>
+            <dd>3 ans à compter du dernier contact</dd>
+            <dt>Destinataires</dt>
+            <dd>Alpha No_Code, Calendly (sous-traitant)</dd>
+          </dl>
+        </div>
+
+        <div class="treatment-card">
+          <h3>Gestion de la relation client</h3>
+          <dl class="treatment-meta">
+            <dt>Données</dt>
+            <dd>Coordonnées, informations contractuelles, historique des échanges</dd>
+            <dt>Source</dt>
+            <dd>Relation commerciale directe</dd>
+            <dt>Finalité</dt>
+            <dd>Exécution des prestations, facturation, suivi de projet</dd>
+            <dt>Base légale</dt>
+            <dd>Exécution du contrat (art. 6.1.b) / Obligation légale (art. 6.1.c)</dd>
+            <dt>Durée</dt>
+            <dd>Durée du contrat + 5 ans (prescription commerciale)</dd>
+            <dt>Destinataires</dt>
+            <dd>Alpha No_Code, expert-comptable le cas échéant</dd>
+          </dl>
+        </div>
+
+        <div class="treatment-card">
+          <h3>Analyse et amélioration du site</h3>
+          <dl class="treatment-meta">
+            <dt>Données</dt>
+            <dd>Adresse IP anonymisée, pages consultées, durée de visite, navigateur</dd>
+            <dt>Source</dt>
+            <dd>Navigation sur alpha-nc.fr</dd>
+            <dt>Finalité</dt>
+            <dd>Mesure d'audience, amélioration de l'expérience utilisateur</dd>
+            <dt>Base légale</dt>
+            <dd>Consentement (art. 6.1.a RGPD) — uniquement si l'outil d'analyse est activé</dd>
+            <dt>Durée</dt>
+            <dd>13 mois maximum</dd>
+            <dt>Destinataires</dt>
+            <dd>Aucun outil d'analyse activé à ce jour</dd>
+          </dl>
+        </div>
+
+      </div>
+
+      <div class="legal-section">
+        <h2>Sous-traitants et partenaires</h2>
+        <p>Alpha No_Code fait appel aux prestataires suivants pour la fourniture de ses services :</p>
+        <ul>
+          <li><strong>Calendly</strong> — prise de rendez-vous (États-Unis, clauses contractuelles types)</li>
+          <li><strong>IONOS SE</strong> (hébergeur) — Montabaur, Allemagne (UE)</li>
+        </ul>
+        <p>Ces sous-traitants sont sélectionnés pour leur conformité RGPD et liés par des accords de traitement des données.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Vos droits</h2>
+        <p>Vous pouvez exercer à tout moment vos droits d'accès, de rectification, d'effacement, de portabilité, d'opposition et de limitation en contactant :</p>
+        <p>
+          <strong>Alpha No_Code</strong> — Guillaume Dos Santos<br />
+          6 PL DU LABOURD, 64500 Saint-Jean-de-Luz<br />
+          Email : <a href="mailto:contact@alpha-nc.fr">contact@alpha-nc.fr</a><br />
+          Délai de réponse : 1 mois maximum
+        </p>
+        <p>
+          En cas de désaccord avec notre réponse, vous pouvez saisir la <strong>Commission Nationale de l'Informatique et des Libertés (CNIL)</strong> :
+          <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">cnil.fr/fr/plaintes</a> ou par courrier à 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07.
+        </p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Sécurité des données</h2>
+        <p>Alpha No_Code met en œuvre les mesures suivantes pour protéger vos données :</p>
+        <ul>
+          <li>Protocole HTTPS sur l'ensemble du site</li>
+          <li>Accès restreints aux données (politique du moindre privilège)</li>
+          <li>Mots de passe complexes et authentification à deux facteurs sur les outils utilisés</li>
+          <li>Pas de stockage de données sensibles en clair</li>
+        </ul>
+      </div>
+
+      <div class="legal-section">
+        <h2>Violation de données</h2>
+        <p>
+          En cas de violation de données personnelles susceptible d'engendrer un risque pour vos droits et libertés, Alpha No_Code s'engage à en notifier la CNIL dans les 72 heures conformément à l'article 33 du RGPD, et à vous en informer sans délai injustifié si le risque est élevé (art. 34).
+        </p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Délégué à la Protection des Données (DPO)</h2>
+        <p>
+          En tant que structure de taille TPE/PME, Alpha No_Code n'est pas soumise à l'obligation de désigner un DPO au sens de l'article 37 du RGPD. Le responsable du traitement assume directement ces fonctions et peut être contacté à <a href="mailto:contact@alpha-nc.fr">contact@alpha-nc.fr</a>.
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="site-footer">
+    <div class="footer-topline" aria-hidden="true"></div>
+    <span class="footer-ghost" aria-hidden="true">Alpha</span>
+    <div class="container footer-grid">
+      <div class="footer-col-brand">
+        <a href="index.html" class="brand-group footer-brand" aria-label="Alpha No_Code, Accueil">
+          <img src="https://z-cdn-media.chatglm.cn/files/4865b8b1-f1e7-4a55-9116-e7069e92d95b.png?auth_key=1868766478-c457842d6c274d0788f83edb2b9f6a58-0-d319a15aaa33ab9badd3a3ded10439ae" alt="Alpha No_Code" class="brand-logo-img" />
+          <span class="brand-name">Alpha No_Code</span>
+        </a>
+        <p class="footer-copy">On structure et automatise ce qui ralentit votre progression, pour que votre activité tienne la cadence de votre ambition.</p>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-col-title">Navigation</h3>
+        <ul class="footer-links">
+          <li><a href="index.html#frictions">Les freins</a></li>
+          <li><a href="index.html#methode">Méthode ALPHA</a></li>
+          <li><a href="index.html#equipe">L'équipe</a></li>
+          <li><a href="index.html#offres">Offres</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="calculateur-roi.html" class="footer-link-accent">Simulateur ROI <span aria-hidden="true">→</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-col-title">Contact</h3>
+        <ul class="footer-links">
+          <li><a href="mailto:contact@alpha-nc.fr">contact@alpha-nc.fr</a></li>
+          <li><a href="https://calendly.com/agence-alphanc/audit-decouverte" target="_blank" rel="noopener">Planifier un échange</a></li>
+        </ul>
+        <h3 class="footer-col-title footer-col-title--spaced">Légal</h3>
+        <ul class="footer-links">
+          <li><a href="mentions-legales.html">Mentions légales</a></li>
+          <li><a href="confidentialite.html">Politique de confidentialité</a></li>
+          <li><a href="rgpd.html">RGPD &amp; données</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Alpha No_Code. Tous droits réservés.</span>
+      <span class="footer-bottom-tagline">Conseil opérationnel · No-Code · Automatisation</span>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const header = document.querySelector('.site-header');
+      if (!header) return;
+      window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 60);
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>
